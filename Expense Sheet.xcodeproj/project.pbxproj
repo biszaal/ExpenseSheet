@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61629E236869ECB42BCE0D7E /* Pods_Expense_Sheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0476289DD906856C2D2CE57F /* Pods_Expense_Sheet.framework */; };
+		6174BF25248466AD009BA698 /* RecentDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174BF24248466AD009BA698 /* RecentDataListView.swift */; };
+		6174BF2E248575D0009BA698 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174BF2D248575D0009BA698 /* ChartView.swift */; };
+		6174BF32248691A3009BA698 /* totalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174BF31248691A3009BA698 /* totalData.swift */; };
+		6174BF5724871914009BA698 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174BF5624871914009BA698 /* AnalyticsView.swift */; };
 		61BF22852481ACB80093D867 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF22842481ACB80093D867 /* AppDelegate.swift */; };
 		61BF22872481ACB80093D867 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF22862481ACB80093D867 /* SceneDelegate.swift */; };
 		61BF228A2481ACB80093D867 /* Expense_Sheet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61BF22882481ACB80093D867 /* Expense_Sheet.xcdatamodeld */; };
@@ -14,9 +19,19 @@
 		61BF228E2481ACB90093D867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BF228D2481ACB90093D867 /* Assets.xcassets */; };
 		61BF22912481ACB90093D867 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BF22902481ACB90093D867 /* Preview Assets.xcassets */; };
 		61BF22942481ACB90093D867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61BF22922481ACB90093D867 /* LaunchScreen.storyboard */; };
+		61BF229C2481BA850093D867 /* NewTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF229B2481BA840093D867 /* NewTransactionView.swift */; };
+		61BF22A22481C90C0093D867 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF22A12481C90C0093D867 /* Home.swift */; };
+		61C56CC6248215B90044D12F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C56CC5248215B90044D12F /* CloudKit.framework */; };
+		61C56CCB2482D62C0044D12F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C56CC92482D62C0044D12F /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0476289DD906856C2D2CE57F /* Pods_Expense_Sheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expense_Sheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BF1996556DD5EAFBAD9E0E0 /* Pods-Expense Sheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Sheet.release.xcconfig"; path = "Target Support Files/Pods-Expense Sheet/Pods-Expense Sheet.release.xcconfig"; sourceTree = "<group>"; };
+		6174BF24248466AD009BA698 /* RecentDataListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataListView.swift; sourceTree = "<group>"; };
+		6174BF2D248575D0009BA698 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		6174BF31248691A3009BA698 /* totalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = totalData.swift; sourceTree = "<group>"; };
+		6174BF5624871914009BA698 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		61BF22812481ACB80093D867 /* Expense Sheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Sheet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61BF22842481ACB80093D867 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61BF22862481ACB80093D867 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +41,12 @@
 		61BF22902481ACB90093D867 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		61BF22932481ACB90093D867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61BF22952481ACB90093D867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61BF229B2481BA840093D867 /* NewTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionView.swift; sourceTree = "<group>"; };
+		61BF22A12481C90C0093D867 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		61C56CC3248215B60044D12F /* Expense Sheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Expense Sheet.entitlements"; sourceTree = "<group>"; };
+		61C56CC5248215B90044D12F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		61C56CC92482D62C0044D12F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		BC151A0AFB176F02D83516D6 /* Pods-Expense Sheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Sheet.debug.xcconfig"; path = "Target Support Files/Pods-Expense Sheet/Pods-Expense Sheet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +54,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C56CC6248215B90044D12F /* CloudKit.framework in Frameworks */,
+				61629E236869ECB42BCE0D7E /* Pods_Expense_Sheet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B5179193832A65C540774A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC151A0AFB176F02D83516D6 /* Pods-Expense Sheet.debug.xcconfig */,
+				1BF1996556DD5EAFBAD9E0E0 /* Pods-Expense Sheet.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6174BF232484667D009BA698 /* Home View */ = {
+			isa = PBXGroup;
+			children = (
+				61BF22A12481C90C0093D867 /* Home.swift */,
+				6174BF24248466AD009BA698 /* RecentDataListView.swift */,
+				61BF229B2481BA840093D867 /* NewTransactionView.swift */,
+			);
+			path = "Home View";
+			sourceTree = "<group>";
+		};
+		6174BF26248467DD009BA698 /* Analytics View */ = {
+			isa = PBXGroup;
+			children = (
+				6174BF5624871914009BA698 /* AnalyticsView.swift */,
+				6174BF2D248575D0009BA698 /* ChartView.swift */,
+				6174BF31248691A3009BA698 /* totalData.swift */,
+			);
+			path = "Analytics View";
+			sourceTree = "<group>";
+		};
 		61BF22782481ACB80093D867 = {
 			isa = PBXGroup;
 			children = (
+				61C56CBE2481E2A70044D12F /* CoreData */,
+				6174BF232484667D009BA698 /* Home View */,
+				6174BF26248467DD009BA698 /* Analytics View */,
 				61BF22832481ACB80093D867 /* Expense Sheet */,
 				61BF22822481ACB80093D867 /* Products */,
+				61C56CC4248215B90044D12F /* Frameworks */,
+				3B5179193832A65C540774A2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +115,7 @@
 		61BF22832481ACB80093D867 /* Expense Sheet */ = {
 			isa = PBXGroup;
 			children = (
+				61C56CC3248215B60044D12F /* Expense Sheet.entitlements */,
 				61BF22842481ACB80093D867 /* AppDelegate.swift */,
 				61BF22862481ACB80093D867 /* SceneDelegate.swift */,
 				61BF228B2481ACB80093D867 /* ContentView.swift */,
@@ -78,6 +136,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		61C56CBE2481E2A70044D12F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				61C56CC92482D62C0044D12F /* Data.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		61C56CC4248215B90044D12F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61C56CC5248215B90044D12F /* CloudKit.framework */,
+				0476289DD906856C2D2CE57F /* Pods_Expense_Sheet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,6 +160,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61BF22982481ACB90093D867 /* Build configuration list for PBXNativeTarget "Expense Sheet" */;
 			buildPhases = (
+				73D26E1023D9A7BBA5EFFCE8 /* [CP] Check Pods Manifest.lock */,
 				61BF227D2481ACB80093D867 /* Sources */,
 				61BF227E2481ACB80093D867 /* Frameworks */,
 				61BF227F2481ACB80093D867 /* Resources */,
@@ -144,6 +220,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		73D26E1023D9A7BBA5EFFCE8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Expense Sheet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		61BF227D2481ACB80093D867 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -151,8 +252,15 @@
 			files = (
 				61BF228A2481ACB80093D867 /* Expense_Sheet.xcdatamodeld in Sources */,
 				61BF22852481ACB80093D867 /* AppDelegate.swift in Sources */,
+				6174BF2E248575D0009BA698 /* ChartView.swift in Sources */,
+				61BF229C2481BA850093D867 /* NewTransactionView.swift in Sources */,
 				61BF228C2481ACB80093D867 /* ContentView.swift in Sources */,
+				6174BF5724871914009BA698 /* AnalyticsView.swift in Sources */,
+				6174BF32248691A3009BA698 /* totalData.swift in Sources */,
 				61BF22872481ACB80093D867 /* SceneDelegate.swift in Sources */,
+				61C56CCB2482D62C0044D12F /* Data.swift in Sources */,
+				6174BF25248466AD009BA698 /* RecentDataListView.swift in Sources */,
+				61BF22A22481C90C0093D867 /* Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,8 +394,10 @@
 		};
 		61BF22992481ACB90093D867 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC151A0AFB176F02D83516D6 /* Pods-Expense Sheet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Expense Sheet/Expense Sheet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Expense Sheet/Preview Content\"";
 				DEVELOPMENT_TEAM = HG4G2ZMGV8;
@@ -306,8 +416,10 @@
 		};
 		61BF229A2481ACB90093D867 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BF1996556DD5EAFBAD9E0E0 /* Pods-Expense Sheet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Expense Sheet/Expense Sheet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Expense Sheet/Preview Content\"";
 				DEVELOPMENT_TEAM = HG4G2ZMGV8;
