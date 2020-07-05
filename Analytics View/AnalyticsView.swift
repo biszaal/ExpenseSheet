@@ -8,102 +8,65 @@
 
 import SwiftUI
 
-struct AnalyticsView: View {
-    var body: some View {
+struct AnalyticsView: View
+{
+    @State var currentTab = "services"
+    
+    var body: some View
+    {
         
         VStack
             {
-                Text("Anylytics")
+                Text("Analytics")
                     .font(.system(size: 30, design: .serif))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
-                    .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! + 10)
+                    .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                 
-                
-                HStack
+                VStack
                     {
-                        VStack(alignment: .leading)
+                        HStack
+                            {
+                                WillChart()
+                                
+                                TypeChart()
+                                
+                        }
+                        .frame(maxWidth: UIScreen.main.bounds.width / 1.09)
+                        
+                        Spacer()
+                            .frame(height: UIScreen.main.bounds.height / 20)
+                        
+                        Picker(selection: $currentTab, label: Text(""))
                         {
-                            ChartView(kinds: ["need", "want"])
-                                .frame(height: UIScreen.main.bounds.width / 3.5)
-                            
-                            Text("Will")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                            
-                            HStack {
-                                HStack
-                                    {
-                                        Rectangle()
-                                            .fill(Color.init(red: 255 / 255, green: 115 / 255, blue: 0 / 255))
-                                            .frame(width: 10, height: 10)
-                                        
-                                        Text("Want")
-                                            .fixedSize(horizontal: true, vertical: false)
-                                }
-                                HStack
-                                    {
-                                        Rectangle()
-                                            .fill(Color.init(red: 82 / 255, green: 215 / 255, blue: 38 / 255))
-                                            .frame(width: 10, height: 10)
-                                        
-                                        Text("Need")
-                                            .fixedSize(horizontal: true, vertical: false)
-                                }
-                            }
+                            Text("Services").tag("services")
+                            Text("Payment Methods").tag("methods")
                         }
                         .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .frame(maxWidth: UIScreen.main.bounds.width / 1.09, maxHeight: UIScreen.main.bounds.height / 3.5)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+                        .pickerStyle(SegmentedPickerStyle())
                         
-                        VStack(alignment: .leading)
+                        if currentTab == "services"
                         {
-                            ChartView(kinds: ["credit", "debit"])
-                            .frame(height: UIScreen.main.bounds.width / 3.5)
-                            
-                            Text("Type")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                            
-                            HStack {
-                                HStack
-                                    {
-                                        Rectangle()
-                                            .fill(Color.init(red: 0 / 255, green: 126 / 255, blue: 214 / 255))
-                                            .frame(width: 10, height: 10)
-                                        
-                                        Text("Debit")
-                                            .fixedSize(horizontal: true, vertical: false)
-                                }
-                                HStack
-                                    {
-                                        Rectangle()
-                                            .fill(Color.init(red: 255 / 255, green: 0 / 255, blue: 0 / 255))
-                                            .frame(width: 10, height: 10)
-                                        
-                                        Text("Credit")
-                                            .fixedSize(horizontal: true, vertical: false)
-                                }
-                            }
+                            ServicesView()   
                         }
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .frame(maxWidth: UIScreen.main.bounds.width / 1.09, maxHeight: UIScreen.main.bounds.height / 3.5)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                        
+                        else if currentTab == "methods"
+                        {
+                            MethodsView()
+                        }
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width / 1.09)
-                
-                Spacer()
         }
-        .background(LinearGradient(gradient: .init(colors: [.blue,.white]), startPoint: .top, endPoint: .bottom).opacity(0.5))
-        .edgesIgnoringSafeArea(.all)
+        .background(
+            ZStack
+                {
+                    Image("background")
+                        .resizable()
+                        .opacity(0.5)
+            }
+        )
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

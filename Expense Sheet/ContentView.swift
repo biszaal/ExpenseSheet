@@ -8,33 +8,45 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View
+{
     
-    var body: some View {
-        
-        TabView {
-            Home().tabItem
-                {
-                    Image(systemName: "house.fill").font(.title)
-                    Text("Home")
-            }
-            AnalyticsView().tabItem
-                {
-                    Image(systemName: "chart.bar.fill").font(.title)
-                    Text("Analytics")
-            }
-            Text("").tabItem
-                {
-                    Image(systemName: "gear").font(.title)
-                    Text("Settings")
-            }
-            Text("").tabItem
-                {
-                    Image(systemName: "person.fill").font(.title)
-                    Text("Account")
-            }
+    var body: some View
+    {
+        VStack
+            {
+                TabView
+                    {
+                        Home().tabItem
+                            {
+                                Image(systemName: "house.fill").font(.title)
+                                Text("Home")
+                        }
+                        
+                        AnalyticsView().tabItem
+                            {
+                                Image(systemName: "chart.pie.fill").font(.title)
+                                Text("Analytics")
+                        }
+                        
+                        YearView().tabItem
+                            {
+                                Image(systemName: "folder.fill").font(.title)
+                                Text("Reports")
+                        }
+                        
+                        AccountView().tabItem
+                            {
+                                Image(systemName: "person.fill").font(.title)
+                                Text("Account")
+                        }
+                }
+                Spacer()
+                GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 15)
+                
         }
-
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

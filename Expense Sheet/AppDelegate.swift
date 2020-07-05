@@ -6,6 +6,12 @@
 //  Copyright © 2020 Bishal Aryal. All rights reserved.
 //
 
+// For testing//
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
+//
+
 import UIKit
 import CoreData
 
@@ -16,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        MSAppCenter.start("5c1881cc-8082-4a64-8083-7db6b8568b0e", withServices:[
+          MSAnalytics.self,
+          MSCrashes.self
+        ])
+        
         return true
     }
     
@@ -100,9 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let context = self.persistentContainer.newBackgroundContext()
             context.performAndWait {
                 // get list out of store
-                let items: [Data]
+                let items: [TransactionData]
                 do {
-                    try items = context.fetch(Data.getData())
+                    try items = context.fetch(TransactionData.getTransactionData())
                 } catch {
                     let nserror = error as NSError
                     fatalError("Unresolved error \(nserror), \(nserror.userInfo)")

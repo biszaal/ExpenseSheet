@@ -13,38 +13,53 @@ import CoreData
 struct RecentDataListView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
-    @FetchRequest(fetchRequest: Data.getData()) var data: FetchedResults<Data>
+    @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
     
     var body: some View
     {
-            List
-                {
-                    Section (header: Text("Recent Transaction"))
+                List
                     {
-                    ForEach(self.data, id: \.self)
-                    { each in
-                        
-                        Text("\(String(each.year))/\(each.month)/\(each.day) \t \(each.transaction!) \t \(each.price.description) \t \(each.type!) \t \(each.will!)")
-                        
-                    }
-                    .onDelete{ index in
-                        let deleteItem = self.data[index.first!]
-                        self.managedObjectContext.delete(deleteItem)
-                        
-                        try? self.managedObjectContext.save()
-                        
-                    }
-                    }
-        }
-        .cornerRadius(10)
-        .padding()
-        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
-        .shadow(radius: 5)
+                        Section (header: Text("Recent Transaction"))
+                        {
+                            ForEach(0 ..< numberOfRecentList())
+                            { each in
+                                
+                                HStack
+                                    {
+                                        Text("\(self.transactionData[each].year)" + "/" + "\(self.transactionData[each].month)" + "/" + "\(self.transactionData[each].day)")
+                                            .font(.system(size: 10))
+                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].price.description)$, \(self.transactionData[each].type ?? "Unknown")")
+                                            .font(.system(size: 15))
+                                }
+                                .lineLimit(1)
+                                
+                            }
+                            .onDelete{ index in
+                                let deleteItem = self.transactionData[index.first!]
+                                self.managedObjectContext.delete(deleteItem)
+                                
+                                try? self.managedObjectContext.save()
+                                
+                            }
+                        }
+                }
+                .cornerRadius(10)
+                .padding()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3.5)
+                .shadow(radius: 5)
+                
     }
-}
 
-struct RecentDataListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentDataListView()
+    // This function will tell how many list to view in Recent Transaction tab to prevent app crashing when total data is less then 10
+    func numberOfRecentList() -> Int
+    {
+        var num = 10
+        if self.transactionData.count < 10
+        {
+            num = self.transactionData.count
+        }
+        return num
     }
+
+    
 }

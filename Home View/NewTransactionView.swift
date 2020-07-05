@@ -10,14 +10,19 @@ import SwiftUI
 import CloudKit
 import CoreData
 
-struct NewTransactionView: View {
+struct NewTransactionView: View
+{
     
+    // core Data of user transaction
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
-    @FetchRequest(fetchRequest: Data.getData()) var data: FetchedResults<Data>
     
-    @State var numberOfTransaction = 0
+    @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
+    @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
+    @FetchRequest(fetchRequest: CreditCardsData.getCreditCardsData()) var creditCardsData: FetchedResults<CreditCardsData>
+    @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     
     @State var showView: String = "text field"
+    @State var costumeDateView: Bool = true
     
     //display states
     @State var instruction: String = "Write the name of the Purchase."
@@ -25,200 +30,338 @@ struct NewTransactionView: View {
     @State var buttonTapped: Int = 0
     @State var keyboardType:UIKeyboardType = .default
     
-    //hiding and displaying text fields
-    @State private var textField = true
-    @State var viewSaved = false
-    @State var value: CGFloat = 0
+    @State var viewSaved = false  // shows text "Saved"
     
     @State var userInput = ""
     @State var transaction: String = "-"
+    @State var service: String = "-"
     @State var price: Float = 0
     @State var type: String = "-"
+    @State var method: String = "-"
     @State var will: String = "-"
     
+    //if Custom Date
+    @State var maxDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+    @State var date = Date()        //default day is current date if not changed by Custom Date
+    @State var isCustomDate: Bool = false
+    @State var year: Int = 0
+    @State var month: Int = 0
+    @State var day: Int = 0
     
-    var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: -10)
-            
-            VStack {
+    
+    var body: some View
+    {
+        ZStack
+            {
                 
-                Text(instruction)
-                    .foregroundColor(.black)
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                
-                if (showView == "text field")
-                {
-                    TextField("Type Here", text: self.$userInput)
-                        .foregroundColor(.secondary)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.default)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                        .background(Color.white)
-                        .cornerRadius(30)
-                } else if (showView == "price field")
-                {
-                    TextField("Cost Here", text: self.$userInput)
-                        .foregroundColor(.secondary)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                        .background(Color.white)
-                        .cornerRadius(30)
-                } else if (showView == "credit or debit")
-                {
-                    Picker(selection: $type, label: Text(""))
+                VStack
                     {
-                        Text("Credit").tag("Credit")
-                        Text("Debit").tag("Debit")
-                    }
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                    .background(Color.white)
-                    .cornerRadius(30)
-                } else if (showView == "want or need")
-                {
-                    Picker(selection: $will, label: Text(""))
-                    {
-                        Text("Want").tag("Want")
-                        Text("Need").tag("Need")
-                    }
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                    .background(Color.white)
-                    .cornerRadius(30)
+                        HStack
+                            {
+                                Spacer()
+                                // MARK: - Add Date Button
+                                if costumeDateView
+                                {
+                                    Button(action:
+                                        {
+                                            withAnimation
+                                                {
+                                                    self.isCustomDate = true
+                                                    self.instruction = "Select a Date"
+                                                    self.showView = "add date"
+                                                    self.nextButton = "Done"
+                                            }
+                                    }) {
+                                        Image(systemName: "calendar")
+                                        Text("Add Date")
+                                        Spacer()
+                                            .frame(width: UIScreen.main.bounds.width / 40)
+                                    }
+                                    .foregroundColor(.primary)
+                                    .font(.body)
+                                    .padding(.horizontal)
+                                    .background(
+                                        Capsule()
+                                            .fill(Color.secondary)
+                                            .opacity(0.5))
+                                }
+                        }
+                        
+                        Text(instruction)
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                        
+                        // MARK: - Different Views
+                        if (showView == "text field")
+                        {
+                            TextField("Type Here", text: self.$userInput)
+                                .foregroundColor(.secondary)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.default)
+                                .padding()
+                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                                .cornerRadius(30)
+                        } else if (showView == "service")
+                        {
+                            Picker(selection: $service, label: Text(""))
+                            {
+                                ForEach(self.servicesData)
+                                { data in
+                                    Text(data.services ?? "Empty").tag(data.services ?? "Empty")
+                                }
+                            }
+                            .labelsHidden()
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                            .background(Color.white)
+                            .cornerRadius(30)
+                            
+                            AddMoreView(type: "service")
+                            
+                        } else if (showView == "price field")
+                        {
+                            TextField("Cost Here", text: self.$userInput)
+                                .foregroundColor(.secondary)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .padding()
+                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                                .background(Color.white)
+                                .cornerRadius(30)
+                        } else if (showView == "credit or debit")
+                        {
+                            Picker(selection: $type, label: Text(""))
+                            {
+                                Text("Credit Card").tag("Credit")
+                                Text("Debit Card or Cash").tag("Debit")
+                            }
+                            .labelsHidden()
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                            .background(Color.white)
+                            .cornerRadius(30)
+                        } else if (showView == "method")
+                        {
+                            Picker(selection: $method, label: Text(""))
+                            {
+                                if type == "Credit"
+                                {
+                                    ForEach(self.creditCardsData)
+                                    { data in
+                                        Text(data.creditCards ?? "Unknown").tag(data.creditCards!)
+                                    }
+                                }
+                                else if type == "Debit"
+                                {
+                                    ForEach(self.debitCardsData)
+                                    { data in
+                                        Text(data.debitCards ?? "Unknown").tag(data.debitCards!)
+                                    }
+                                }
+                            }
+                            .labelsHidden()
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                            .background(Color.white)
+                            .cornerRadius(30)
+                            
+                            if type == "Credit"
+                            {
+                                AddMoreView(type: "credit")
+                            }
+                            else if type == "Debit"
+                            {
+                                AddMoreView(type: "debit")
+                            }
+                        }
+                        else if (showView == "want or need")
+                        {
+                            Picker(selection: $will, label: Text(""))
+                            {
+                                Text("Want").tag("Want")
+                                Text("Need").tag("Need")
+                            }
+                            .labelsHidden()
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                            .background(Color.white)
+                            .cornerRadius(30)
+                        } else if (showView == "add date")
+                        {
+                            DatePicker("", selection: $date, in: ...maxDate, displayedComponents: .date)
+                                .labelsHidden()
+                                .padding()
+                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                                .background(Color.white)
+                                .cornerRadius(30)
+                        }
+                        
+                        Spacer()
+                        
+                        // MARK: - Next Button
+                        Button(action: {
+                            if(self.isCustomDate) {
+                                self.showView = "text field"
+                                self.instruction = "Write the name of the Purchase."
+                                self.nextButton = "Next"
+                            }
+                            
+                            if(self.buttonTapped == 0)
+                            {
+                                if !(self.userInput == "")
+                                {
+                                    self.transaction = self.userInput
+                                    self.showView = "service"
+                                    self.userInput = ""
+                                    self.instruction = "Choose type of the service."
+                                    self.buttonTapped += 1
+                                    self.costumeDateView = false  // only show costumedate option on the first view
+                                }
+                            }
+                                
+                            else if(self.buttonTapped == 1)
+                            {
+                                if self.service == "-"
+                                {
+                                    self.service = self.servicesData[0].services ?? "Unknown"
+                                }
+                                self.showView = "price field"
+                                self.userInput = ""
+                                self.instruction = "Type the price of that item."
+                                self.buttonTapped += 1
+                            }
+                                
+                            else if(self.buttonTapped == 2)
+                            {
+                                if !(self.userInput == "")
+                                {
+                                    self.price = Float(self.userInput) ?? 0
+                                    self.instruction = "What did you use?"
+                                    self.showView = "credit or debit"  //hide the textfield
+                                    self.buttonTapped += 1
+                                }
+                            }
+                                
+                            else if(self.buttonTapped == 3)
+                            {
+                                if self.type == "-"
+                                { self.type = "Credit" }
+                                self.instruction = "Choose your Payment Method."
+                                self.showView = "method"
+                                self.buttonTapped += 1
+                            }
+                                
+                            else if(self.buttonTapped == 4)
+                            {
+                                if self.method == "-"
+                                {
+                                    if self.type == "Credit"
+                                    {
+                                        self.method = self.creditCardsData[0].creditCards ?? "-"
+                                    }
+                                    else if self.type == "Debit"
+                                    {
+                                        self.method = self.debitCardsData[0].debitCards ?? "-"
+                                    }
+                                }
+                                self.instruction = "Do you wanted it or needed it?"
+                                self.nextButton = "Save"
+                                self.showView = "want or need"
+                                self.buttonTapped += 1
+                                
+                            }
+                            else if(self.buttonTapped == 5)
+                            {
+                                self.instruction = "Write the name of the Purchase."
+                                self.nextButton = "Next"
+                                self.showView = "text field"
+                                self.userInput = ""
+                                self.buttonTapped = 0
+                                if self.will == "-"
+                                { self.will = "Want" }
+                                self.viewSaved = true
+                                self.addItem()
+                                self.isCustomDate = false
+                                
+                            }
+                        }) {
+                            Text(nextButton)
+                                .font(.system(size: 20, design: .serif))
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(width: UIScreen.main.bounds.width / 4 , height: UIScreen.main.bounds.height / 20)
+                                .background(Color.init(red: 254 / 255, green: 95 / 255, blue: 85 / 255).opacity(0.8))
+                                .cornerRadius(20)
+                                .shadow(radius: 20)
+                        }
+                        
                 }
-                
-                
-                Spacer()
-                
-                Button(action: {
-                    
-                    
-                    if(self.buttonTapped == 0)
-                    {
-                        if !(self.userInput == "")
+                .padding()
+                .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
+                .background(
+                    ZStack
                         {
-                            self.transaction = self.userInput
-                            self.showView = "price field"
-                            self.userInput = ""
-                            self.instruction = "Type the price of that item."
-                            self.buttonTapped += 1
-                            self.viewSaved = false  //"saved" view after input
-                        }
+                            Color.primary.colorInvert()
+                            
+                            Image("newTransactionbg")
+                                .resizable()
+                                .blur(radius: 6)
+                                .opacity(0.7)
                     }
-                        
-                    else if(self.buttonTapped == 1)
-                    {
-                        if !(self.userInput == "")
-                        {
-                            self.price = Float(self.userInput) ?? 0
-                            self.instruction = "Did you use Credit or Debit?"
-                            self.showView = "credit or debit"  //hide the textfield
-                            self.buttonTapped += 1
-                        }
-                    }
-                        
-                    else if(self.buttonTapped == 2)
-                    {
-                        self.instruction = "Do you wanted it or needed it?"
-                        self.nextButton = "Save"
-                        self.showView = "want or need"
-                        self.buttonTapped += 1
-                        if self.type == "-"
-                        { self.type = "Credit" }
-                    }
-                    else if(self.buttonTapped == 3)
-                    {
-                        self.instruction = "Write the name of the Purchase."
-                        self.keyboardType = .default
-                        self.nextButton = "Next"
-                        self.showView = "text field"
-                        self.userInput = ""
-                        self.buttonTapped = 0
-                        if self.will == "-"
-                        { self.will = "Want" }
-                        self.viewSaved = true
-                        
-                        self.addItem()    
-                        
-                    }
-                    
-                }) {
-                    Text(nextButton)
-                        .font(.system(size: 20, design: .serif))
+                )
+                    .cornerRadius(30)
+                    .shadow(radius: 10)
+                
+                
+                // MARK: - "Saved" View
+                if self.viewSaved
+                {
+                    Text("Saved.")
+                        .font(.system(size: 40, design: .serif))
                         .foregroundColor(.white)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width / 4 , height: UIScreen.main.bounds.height / 20)
-                        .background(Color.init(red: 254 / 255, green: 95 / 255, blue: 85 / 255).opacity(0.8))
-                        .cornerRadius(20)
+                        .shadow(radius: 20)
+                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 5)
+                        .onAppear()
+                            {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {   // shows for only 2 seconds
+                                    self.viewSaved = false
+                                }
+                    }
                 }
-            }
-            .padding()
-            .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 4)
-            .background(Color.init(red: 198 / 255, green: 236 / 255, blue: 207 / 255))
-            .cornerRadius(30)
-                        
-            // MARK: - "Saved" View
-            if self.viewSaved {
-                Spacer()
-                    .frame(height: UIScreen.main.bounds.height / 15)
-                
-                Text("Saved.")
-                    .font(.system(size: 20, design: .serif))
-                    .foregroundColor(.white)
-                    .shadow(radius: 20)
-                    .onAppear() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {   // shows for only 2 seconds
-                            self.viewSaved = false
-                        }
-                }
-            }
         }
     }
     
     
-    func addItem() {
-        let value = Data(context: self.managedObjectContext)
+    func addItem()
+    {
+        let value = TransactionData(context: self.managedObjectContext)
         
         value.transaction = self.transaction
+        value.service = self.service
         value.price = self.price
+        value.method = self.method
         value.type = self.type
         value.will = self.will
         
-        value.year = Int16(gettingDate(type: "year"))
-        value.month = Int16(gettingDate(type: "month"))
-        value.day = Int16(gettingDate(type: "day"))
+        gettingDate()
         
-        if value.hasChanges {
+        value.year = Int16(self.year)
+        value.month = Int16(self.month)
+        value.day = Int16(self.day)
+        
+        if value.hasChanges
+        {
             try? self.managedObjectContext.save()
         }
     }
     
     
-    func gettingDate(type: String) -> Int {
-        
-        let date = Date()
-        let component = { (unit) in return Calendar.current.component(unit, from: date) }
-        let year = component(.year)
-        let month = component(.month)
-        let day = component(.day)
-        
-        if (type.lowercased() == "year") { return Int(year) }
-            
-        else if (type.lowercased() == "month") { return Int(month) }
-            
-        else if (type.lowercased() == "day") { return Int(day) }
-            
-        else { return -1 }
-    }
-}
-struct NewTransactionView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewTransactionView()
+    func gettingDate()
+    {
+        let component = { (unit) in return Calendar.current.component(unit, from: self.date) }
+        self.year = component(.year)
+        self.month = component(.month)
+        self.day = component(.day)
     }
 }

@@ -1,6 +1,0 @@
-framework module Pods_Expense_Sheet {
-  umbrella header "Pods-Expense Sheet-umbrella.h"
-
-  export *
-  module * { export * }
-}
