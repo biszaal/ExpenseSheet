@@ -6,11 +6,6 @@
 //  Copyright © 2020 Bishal Aryal. All rights reserved.
 //
 
-// For testing//
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
-//
 
 import UIKit
 import CoreData
@@ -22,11 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        MSAppCenter.start("5c1881cc-8082-4a64-8083-7db6b8568b0e", withServices:[
-          MSAnalytics.self,
-          MSCrashes.self
-        ])
         
         return true
     }

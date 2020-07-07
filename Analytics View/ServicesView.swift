@@ -15,7 +15,7 @@ struct ServicesView: View
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
     @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
     
-    @State var lengthOfBar: CGFloat = 0
+    @State var lengthOfBar: CGFloat = 0      // used for animation
     
     var body: some View
     {

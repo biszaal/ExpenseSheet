@@ -7,8 +7,6 @@ target 'ExpenseSheet' do
 
 pod 'Google-Mobile-Ads-SDK'
 
-pod 'AppCenter'
-
   # Pods for ExpenseSheet
 
 end

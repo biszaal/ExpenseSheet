@@ -8,11 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		452C979CDF2984B5E2EC6951 /* Pods_ExpenseSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C3FB41412CD6E18987CC30 /* Pods_ExpenseSheet.framework */; };
-		614E2BCB24ABD66000B7134B /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E2BCA24ABD66000B7134B /* CurrencyData.swift */; };
 		614E2BCD24ABDAEC00B7134B /* CurrencyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E2BCC24ABDAEC00B7134B /* CurrencyPickerView.swift */; };
-		614E2BCF24ABE5BD00B7134B /* currencyFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 614E2BCE24ABE5BD00B7134B /* currencyFile.json */; };
-		614E2BD124ABEA6600B7134B /* FetchCurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E2BD024ABEA6600B7134B /* FetchCurrencyData.swift */; };
-		614E2BD524ABFF9200B7134B /* StoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E2BD424ABFF9200B7134B /* StoreData.swift */; };
 		6163295F248C4F65002B77A2 /* listOfCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6163295E248C4F65002B77A2 /* listOfCreditsView.swift */; };
 		61632962248C501E002B77A2 /* listOfDebitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61632961248C501E002B77A2 /* listOfDebitsView.swift */; };
 		61632964248C516C002B77A2 /* listOfMethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61632963248C516C002B77A2 /* listOfMethodsView.swift */; };
@@ -52,11 +48,7 @@
 /* Begin PBXFileReference section */
 		1BF1996556DD5EAFBAD9E0E0 /* Pods-Expense Sheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Sheet.release.xcconfig"; path = "Target Support Files/Pods-Expense Sheet/Pods-Expense Sheet.release.xcconfig"; sourceTree = "<group>"; };
 		59526B5A41B841F8A683142A /* Pods-ExpenseSheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseSheet.debug.xcconfig"; path = "Target Support Files/Pods-ExpenseSheet/Pods-ExpenseSheet.debug.xcconfig"; sourceTree = "<group>"; };
-		614E2BCA24ABD66000B7134B /* CurrencyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		614E2BCC24ABDAEC00B7134B /* CurrencyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerView.swift; sourceTree = "<group>"; };
-		614E2BCE24ABE5BD00B7134B /* currencyFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currencyFile.json; sourceTree = "<group>"; };
-		614E2BD024ABEA6600B7134B /* FetchCurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCurrencyData.swift; sourceTree = "<group>"; };
-		614E2BD424ABFF9200B7134B /* StoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreData.swift; sourceTree = "<group>"; };
 		6163295E248C4F65002B77A2 /* listOfCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfCreditsView.swift; sourceTree = "<group>"; };
 		61632961248C501E002B77A2 /* listOfDebitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfDebitsView.swift; sourceTree = "<group>"; };
 		61632963248C516C002B77A2 /* listOfMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfMethodsView.swift; sourceTree = "<group>"; };
@@ -121,17 +113,6 @@
 				AB6FBFD7AE2638119C09D137 /* Pods-ExpenseSheet.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		614E2BC724ABD61C00B7134B /* CurrencyLogoJSON */ = {
-			isa = PBXGroup;
-			children = (
-				614E2BCE24ABE5BD00B7134B /* currencyFile.json */,
-				614E2BCA24ABD66000B7134B /* CurrencyData.swift */,
-				614E2BD024ABEA6600B7134B /* FetchCurrencyData.swift */,
-				614E2BD424ABFF9200B7134B /* StoreData.swift */,
-			);
-			path = CurrencyLogoJSON;
 			sourceTree = "<group>";
 		};
 		61632960248C4FDC002B77A2 /* listOfMethodsView */ = {
@@ -218,7 +199,6 @@
 		61BF22782481ACB80093D867 = {
 			isa = PBXGroup;
 			children = (
-				614E2BC724ABD61C00B7134B /* CurrencyLogoJSON */,
 				61A24C9324A6D9C000660696 /* AdMobs */,
 				6163296B248C863F002B77A2 /* SplashScreenView */,
 				61862916248B21D0008F396A /* Account View */,
@@ -350,7 +330,6 @@
 			files = (
 				61BF22942481ACB90093D867 /* LaunchScreen.storyboard in Resources */,
 				61BF22912481ACB90093D867 /* Preview Assets.xcassets in Resources */,
-				614E2BCF24ABE5BD00B7134B /* currencyFile.json in Resources */,
 				61BF228E2481ACB90093D867 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,8 +385,6 @@
 			files = (
 				6163296F248C8C5D002B77A2 /* DebitCardsData.swift in Sources */,
 				61BF228A2481ACB80093D867 /* Expense_Sheet.xcdatamodeld in Sources */,
-				614E2BD124ABEA6600B7134B /* FetchCurrencyData.swift in Sources */,
-				614E2BD524ABFF9200B7134B /* StoreData.swift in Sources */,
 				61BF22852481ACB80093D867 /* AppDelegate.swift in Sources */,
 				6163295F248C4F65002B77A2 /* listOfCreditsView.swift in Sources */,
 				61A24C9224A6D3AE00660696 /* GoogleAdView.swift in Sources */,
@@ -415,7 +392,6 @@
 				61BF229C2481BA850093D867 /* NewTransactionView.swift in Sources */,
 				618F8EEB2496E0420096BBC1 /* MethodsView.swift in Sources */,
 				61862918248B21E2008F396A /* AccountView.swift in Sources */,
-				614E2BCB24ABD66000B7134B /* CurrencyData.swift in Sources */,
 				61632971248C8E17002B77A2 /* ServicesData.swift in Sources */,
 				618F8EE22496BBBD0096BBC1 /* WillChart.swift in Sources */,
 				618F8EED249723950096BBC1 /* MonthlyExpenses.swift in Sources */,

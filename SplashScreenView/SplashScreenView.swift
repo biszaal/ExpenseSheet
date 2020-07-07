@@ -34,7 +34,7 @@ struct SplashScreenView: View
                         listOfServicesView()
                             .cornerRadius(10)
                             .padding()
-                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
                             .shadow(radius: 5)
                     }
                     Section(header:
@@ -45,12 +45,24 @@ struct SplashScreenView: View
                         listOfMethodsView()
                             .cornerRadius(10)
                             .padding()
-                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
                             .shadow(radius: 5)
                     }
-                    
+                    Section(header:
+                        Text("Enter Your Currency Symbol")
+                            .font(.body)
+                            .foregroundColor(.secondary))
+                    {
+                        Form
+                            {
+                                CurrencyPickerView()
+                        }
+                        .cornerRadius(10)
+                        .padding()
+                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 8)
+                        .shadow(radius: 5)
+                    }
                 }
-                .background(LinearGradient(gradient: .init(colors: [.blue,.white]), startPoint: .top, endPoint: .bottom))
                 .edgesIgnoringSafeArea(.all)
         }
         

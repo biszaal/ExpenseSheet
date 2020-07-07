@@ -10,21 +10,42 @@ import SwiftUI
 
 struct CurrencyPickerView: View
 {
-    @State var selectedCurrency: String = "-"
+    @State public var currencyLogo = "$"
     
-    @ObservedObject var currencyLogo = StoreData()
+    @State var isTextField = false
     
     var body: some View {
-        
-        List(currencyLogo.currencyData, id: \.id)
-        { curr in
-            Text("curr.code")
+        VStack
+            {
+                if isTextField
+                {
+                    HStack
+                        {
+                            TextField("Example: $, €, ¥, रू, ₹", text: $currencyLogo)
+                            Spacer()
+                            Button(action: {
+                                self.isTextField = false
+                            })
+                            {
+                                Text("Done")
+                                    .foregroundColor(Color.blue) 
+                            }
+                    }
+                }
+                else {
+                    HStack
+                        {
+                            Text("Currency Selected : \(currencyLogo)")
+                            Spacer()
+                            Button(action: {
+                                self.isTextField = true
+                            })
+                            {
+                                Text("Edit")
+                                    .foregroundColor(Color.blue)
+                            }
+                    }
+                }
         }
-    }
-}
-
-struct CurrencyPickerView_Preview: PreviewProvider{
-    static var previews: some View {
-        CurrencyPickerView()
     }
 }

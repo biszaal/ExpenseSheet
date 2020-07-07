@@ -16,7 +16,6 @@ struct Home: View
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
     
     @State var showTransactionView = false
-    @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash")
     
     @State var yearStat = Calendar.current.component(.year, from: Date())
     @State var monthlyStatView = true
@@ -139,25 +138,6 @@ struct Home: View
                     })
                 }
                 
-                // only runs when the app lunchs for the first time
-                if !self.hideSplashScreen
-                {
-                    VStack
-                        {
-                            
-                            SplashScreenView()
-                                .onAppear() {
-                                    self.storeDefaultValue()
-                            }
-                            
-                            Button(action: {
-                                self.hideSplashScreen = true
-                                UserDefaults.standard.set(self.hideSplashScreen, forKey: "splash")
-                            }) {
-                                Text("Continue")
-                            }
-                    }
-                }
         }
         .background(
             ZStack
@@ -183,34 +163,4 @@ struct Home: View
         return years.sorted(by: >)
     }
     
-    // storing default value on the first time of access to the app
-    func storeDefaultValue ()
-    {
-        
-        let defaultServices = ["Food", "Education", "Transportation", "Bills", "Entertainment"]
-        let defaultCreditCards = ["Visa", "Master Card"]
-        let defaultDebitCards = ["Cash"]
-        
-        for creditCard in defaultCreditCards
-        {
-            let value = CreditCardsData(context: self.managedObjectContext)
-            value.creditCards = creditCard
-            try? self.managedObjectContext.save()
-        }
-        
-        for debitCard in defaultDebitCards
-        {
-            let value = DebitCardsData(context: self.managedObjectContext)
-            value.debitCards = debitCard
-            try? self.managedObjectContext.save()
-        }
-        
-        for service in defaultServices
-        {
-            let value = ServicesData(context: self.managedObjectContext)
-            value.services = service
-            try? self.managedObjectContext.save()
-        }
-        
-    }
 }

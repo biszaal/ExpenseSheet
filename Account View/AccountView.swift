@@ -44,11 +44,7 @@ struct AccountView: View {
                             
                             Section(header: Text("Details"))
                             {
-                                NavigationLink(destination: CurrencyPickerView())
-                                {
-                                    Text("world")
-                                }
-                                
+                               CurrencyPickerView()
                             }
                     }
                     .navigationBarTitle("")

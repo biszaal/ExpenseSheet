@@ -16,7 +16,7 @@ struct MonthlyExpenses: View
     
     var year: Int
     
-    @State var heightOfBar:CGFloat = 0
+    @State var heightOfBar:CGFloat = 0      // used for animation
     
     var body: some View
     {
