@@ -34,16 +34,18 @@ struct MethodsView: View
                             HStack
                                 {
                                     Text(data.creditCards ?? "Empty")
+                                    .font(.system(size: UIScreen.main.bounds.width / 25))
+                                    .lineLimit(1)
                                     
                                     Spacer()
                                     
                                     Capsule()
-                                        .frame(width: ((UIScreen.main.bounds.width * CGFloat(self.getPriceOfMethods(method: data.creditCards!))) / CGFloat(self.getTotalPrice())) / 1.2 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                        .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.creditCards!)) / CGFloat(self.maxPrice(type: "credit") + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
                                         .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
                                     
-                                    Text(String(self.getPriceOfMethods(method: data.creditCards!)))
-                                        .font(.system(size: 15))
-                                        .frame(maxWidth: 50)
+                                    Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.creditCards!)))
+                                        .frame(maxWidth: UIScreen.main.bounds.width / 8)
+                                        .font(.system(size: UIScreen.main.bounds.width / 30))
                             }
                         }
                         .onAppear
@@ -68,16 +70,18 @@ struct MethodsView: View
                             HStack
                                 {
                                     Text(data.debitCards ?? "Empty")
+                                    .font(.system(size: UIScreen.main.bounds.width / 25))
+                                    .lineLimit(1)
                                     
                                     Spacer()
                                     
                                     Capsule()
-                                        .frame(width: ((UIScreen.main.bounds.width * CGFloat(self.getPriceOfMethods(method: data.debitCards!))) / CGFloat(self.getTotalPrice())) / 1.2 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                        .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.debitCards!)) / CGFloat(self.maxPrice(type: "debit") + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
                                         .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
                                     
-                                    Text(String(self.getPriceOfMethods(method: data.debitCards!)))
-                                        .font(.system(size: 15))
-                                        .frame(maxWidth: 50)
+                                    Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.debitCards!)))
+                                        .frame(maxWidth: UIScreen.main.bounds.width / 8)
+                                        .font(.system(size: UIScreen.main.bounds.width / 30))
                             }
                         }
                         .onAppear
@@ -89,23 +93,45 @@ struct MethodsView: View
                             }
                     }
                 }
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                .shadow(radius: 5)
         }
         .padding()
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
     
-    func getTotalPrice() -> Int
+    func maxPrice(type: String) -> Int
     {
-        var total: Int = 0
+        var maxPrice: Int = 0
+        var eachMethodTotal: Int = 0
         
-        for each in self.transactionData {
-            total += Int(each.price)
+        if type == "credit"
+        {
+        for each in self.creditCardsData
+        {
+            eachMethodTotal = getPriceOfMethods(method: each.creditCards!)
+            
+            if eachMethodTotal > maxPrice
+            {
+                maxPrice = eachMethodTotal
+            }
         }
-        
-        return total
+        } else if type == "debit"
+        {
+            for each in self.debitCardsData
+                   {
+                       eachMethodTotal = getPriceOfMethods(method: each.debitCards!)
+                       
+                       if eachMethodTotal > maxPrice
+                       {
+                           maxPrice = eachMethodTotal
+                       }
+                   }
+        }
+        else {
+            print("no value")
+        }
+        return maxPrice
     }
     
     func getPriceOfMethods(method: String) -> Int
@@ -119,6 +145,21 @@ struct MethodsView: View
         }
         
         return price
+    }
+    
+    func tooLongInt(number: Int) -> String// this will reduce too long integers for ex: 100,000 -> 10 k
+    {
+        var result: String = String(number)
+        if number > 100000
+        {
+            result = String((number / 1000).description) + "k"
+        }
+        
+        if number > 1000000
+        {
+            result = String((number / 1000).description) + "m"
+        }
+        return result
     }
 }
 

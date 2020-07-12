@@ -15,6 +15,8 @@ struct RecentDataListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
     
+    @State var currencyLogo = CurrencyPickerView().currency
+    
     var body: some View
     {
                 List
@@ -28,7 +30,7 @@ struct RecentDataListView: View {
                                     {
                                         Text("\(self.transactionData[each].year)" + "/" + "\(self.transactionData[each].month)" + "/" + "\(self.transactionData[each].day)")
                                             .font(.system(size: 10))
-                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].price.description)$, \(self.transactionData[each].type ?? "Unknown")")
+                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].price.description) \(self.currencyLogo), \(self.transactionData[each].type ?? "Unknown")")
                                             .font(.system(size: 15))
                                 }
                                 .lineLimit(1)
@@ -43,10 +45,6 @@ struct RecentDataListView: View {
                             }
                         }
                 }
-                .cornerRadius(10)
-                .padding()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 3.5)
-                .shadow(radius: 5)
                 
     }
 

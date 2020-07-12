@@ -44,9 +44,10 @@ struct AccountView: View {
                             
                             Section(header: Text("Details"))
                             {
-                               CurrencyPickerView()
+                                CurrencyPickerView()
                             }
                     }
+                    .padding(.bottom, UIScreen.main.bounds.height / 10)
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
             }

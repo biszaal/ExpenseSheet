@@ -29,66 +29,67 @@ struct AddMoreView: View
     
     var body: some View
     {
-        HStack
+        HStack(spacing: UIScreen.main.bounds.width / 3)
+        {
+            if showAddNewButton
             {
-                if showAddNewButton
+                Button(action: {
+                    self.showAddNewButton = false
+                })
                 {
-                    Button(action: {
-                        self.showAddNewButton = false
-                    })
-                    {
-                        Text("+ Add more")
-                    }
+                    Text("+ Add more")
                 }
-                else
-                {
-                    TextField("Type here", text: self.$newItem)
-                    
-                    Button(action: {
-                        if !self.newItem.isEmpty {
-                            if self.type == "service"
+            }
+            else
+            {
+                TextField("Type here", text: self.$newItem)
+                Button(action: {
+                    if !self.newItem.isEmpty {
+                        if self.type == "service"
+                        {
+                            let data = ServicesData(context: self.managedObjectContext)
+                            data.services = self.newItem
+                            self.newItem = ""
+                            if data.hasChanges
                             {
-                                let data = ServicesData(context: self.managedObjectContext)
-                                data.services = self.newItem
-                                self.newItem = ""
-                                if data.hasChanges
-                                {
-                                    try? self.managedObjectContext.save()
-                                }
+                                try? self.managedObjectContext.save()
                             }
-                            else if self.type == "credit"
+                        }
+                        else if self.type == "credit"
+                        {
+                            let data = CreditCardsData(context: self.managedObjectContext)
+                            data.creditCards = self.newItem
+                            self.newItem = ""
+                            if data.hasChanges
                             {
-                                let data = CreditCardsData(context: self.managedObjectContext)
-                                   data.creditCards = self.newItem
-                                   self.newItem = ""
-                                   if data.hasChanges
-                                   {
-                                       try? self.managedObjectContext.save()
-                                   }
+                                try? self.managedObjectContext.save()
                             }
-                            else if self.type == "debit"
+                        }
+                        else if self.type == "debit"
+                        {
+                            let data = DebitCardsData(context: self.managedObjectContext)
+                            data.debitCards = self.newItem
+                            self.newItem = ""
+                            if data.hasChanges
                             {
-                                let data = DebitCardsData(context: self.managedObjectContext)
-                                   data.debitCards = self.newItem
-                                   self.newItem = ""
-                                   if data.hasChanges
-                                   {
-                                       try? self.managedObjectContext.save()
-                                   }
+                                try? self.managedObjectContext.save()
                             }
-                            
                         }
                         
-                        self.showAddNewButton = true
-                    })
-                    {
-                        Text("Done")
-                            .foregroundColor(.blue)
                     }
+                    
+                    self.showAddNewButton = true
+                })
+                {
+                    Text("Done")
+                        .foregroundColor(.blue)
                 }
+            }
         }
         .fixedSize(horizontal: true, vertical: false)
         .padding()
-        .frame(maxWidth: UIScreen.main.bounds.width / 2)
+        .frame(maxWidth: UIScreen.main.bounds.width / 1.2, maxHeight: UIScreen.main.bounds.height / 20)
+        .background(Color.primary.colorInvert())
+        .cornerRadius(20)
     }
 }

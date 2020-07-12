@@ -13,7 +13,7 @@ extension ServicesData {
         
         let request: NSFetchRequest<ServicesData> = ServicesData.fetchRequest() as! NSFetchRequest<ServicesData>
         
-        request.sortDescriptors = []
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ServicesData.services, ascending: true)]
         
         return request
     }

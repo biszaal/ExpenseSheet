@@ -34,7 +34,7 @@ struct Home: View
                             .foregroundColor(.white)
                             .padding()
                             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
-                            .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                             .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                         
                         Spacer()
@@ -43,24 +43,27 @@ struct Home: View
                         
                         
                         RecentDataListView()
-                        
-                        Spacer()
+                        .cornerRadius(10)
+                        .padding()
+                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
+                        .shadow(radius: 5)
                         
                         VStack
                             {
-                                HStack
-                                    {
-                                        Text(String(yearStat))
-                                        Button(action: {
-                                            withAnimation
-                                                {
-                                                    self.monthlyStatView.toggle()
-                                            }
-                                        })
+                                Button(action: {
+                                    withAnimation
                                         {
+                                            self.monthlyStatView.toggle()
+                                    }
+                                })
+                                {
+                                    HStack
+                                        {
+                                            Text(String(yearStat))
+                                                .foregroundColor(.primary)
                                             Image(systemName: "chevron.down.square.fill")
                                                 .cornerRadius(.infinity)
-                                        }
+                                    }
                                 }
                                 .font(.system(size: UIScreen.main.bounds.width / 20, design: .serif))
                                 .padding()
@@ -70,14 +73,15 @@ struct Home: View
                                     MonthlyExpenses(year: yearStat)
                                 } else
                                 {
+                                    
                                     Picker(selection: $yearStat, label: Text("")) {
                                         ForEach(self.listOfYears(), id: \.self) { eachYear in
                                             Text(String(eachYear))
                                         }
                                     }
                                     .labelsHidden()
-                                    
-
+                                    .frame(maxHeight: UIScreen.main.bounds.height / 5)
+                                    .padding()
                                     
                                     Button(action: {
                                         withAnimation
@@ -95,6 +99,7 @@ struct Home: View
                                             .shadow(radius: 20)
                                     }
                                     Spacer()
+                                        .frame(height: UIScreen.main.bounds.height / 40)
                                 }
                         }
                         
@@ -107,17 +112,17 @@ struct Home: View
                     }
                 }) {
                     Image(systemName: "plus")
-                        .font(.system(size: UIScreen.main.bounds.width / 15))
+                        .font(.system(size: UIScreen.main.bounds.width / 13.5))
                         .foregroundColor(.white)
                         .background(
                             Circle()
                                 .fill(Color.blue)
                                 .padding()
-                                .frame(width: 80, height: 80)
+                                .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.height / 10)
                     )
                         .padding()
                 }
-                .position(x: UIScreen.main.bounds.width - (UIScreen.main.bounds.width / 8), y: UIScreen.main.bounds.height / 14)
+                .position(x: UIScreen.main.bounds.width - (UIScreen.main.bounds.width / 8), y: UIScreen.main.bounds.height / 13)
                 
                 
                 if self.showTransactionView
@@ -142,12 +147,12 @@ struct Home: View
         .background(
             ZStack
                 {
-            Image("background")
-                .resizable()
-                .opacity(0.5)
+                    Image("background")
+                        .resizable()
+                        .opacity(0.5)
             }
         )
-        .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.top)
     }
     
     func listOfYears() -> [Int]

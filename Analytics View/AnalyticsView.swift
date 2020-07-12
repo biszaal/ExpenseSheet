@@ -50,11 +50,13 @@ struct AnalyticsView: View
                         
                         if currentTab == "services"
                         {
-                            ServicesView()   
+                            ServicesView()
+                            .padding()
                         }
                         else if currentTab == "methods"
                         {
                             MethodsView()
+                            .padding()
                         }
                 }
         }

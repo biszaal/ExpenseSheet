@@ -28,43 +28,50 @@ struct ServicesView: View
                         HStack
                             {
                                 Text(data.services ?? "Empty")
+                                .font(.system(size: UIScreen.main.bounds.width / 25))
+                                .lineLimit(1)
                                 
                                 Spacer()
                                 
                                 Capsule()
-                                    .frame(width: ((UIScreen.main.bounds.width * CGFloat(self.getPriceOfService(service: data.services!))) / CGFloat(self.getTotalPrice())) / 1.2 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfService(service: data.services!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
                                     .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
                                 
-                                Text(String(self.getPriceOfService(service: data.services!)))
-                                    .font(.system(size: 15))
-                                    .frame(maxWidth: 50)
+                                Text(self.tooLongInt(number: self.getPriceOfService(service: data.services!)))
+                                    .frame(maxWidth: UIScreen.main.bounds.width / 8)
+                                    .font(.system(size: UIScreen.main.bounds.width / 30))
                         }
                     }
                     .onAppear
+                        {
+                            withAnimation(.linear(duration: 1))
                             {
-                                withAnimation(.linear(duration: 1))
-                                    {
                                 self.lengthOfBar = 1
-                                }
-                        }
+                            }
+                    }
                 }
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                .shadow(radius: 5)
         }
         .padding()
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
     
-    func getTotalPrice() -> Int
+    func maxPrice() -> Int
     {
-        var total: Int = 0
+        var maxPrice: Int = 0
+        var eachServiceTotal: Int = 0
         
-        for each in self.transactionData {
-            total += Int(each.price)
+        for each in self.servicesData
+        {
+            eachServiceTotal = getPriceOfService(service: each.services!)
+            
+            if eachServiceTotal > maxPrice
+            {
+                maxPrice = eachServiceTotal
+            }
         }
-        
-        return total
+        return maxPrice
     }
     
     func getPriceOfService(service: String) -> Int
@@ -78,6 +85,21 @@ struct ServicesView: View
         }
         
         return price
+    }
+    
+    func tooLongInt(number: Int) -> String// this will reduce too long integers for ex: 100,000 -> 10 k
+    {
+        var result: String = String(number)
+        if number > 100000
+        {
+            result = String((number / 1000).description) + "k"
+        }
+        
+        if number > 1000000
+        {
+            result = String((number / 1000).description) + "m"
+        }
+        return result
     }
 }
 

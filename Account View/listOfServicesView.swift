@@ -19,7 +19,6 @@ struct listOfServicesView: View
     
     var body: some View
     {
-        VStack{
         List
             {
                 Section(header: Text("Services"))
@@ -65,11 +64,9 @@ struct listOfServicesView: View
                     }
                 }
         }
-        Spacer()
-            .frame(height: UIScreen.main.bounds.height / 50)
-        }
+        .padding(.bottom, UIScreen.main.bounds.height / 10)
     }
-
-
+    
+    
 }
 

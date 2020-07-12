@@ -6,6 +6,8 @@ struct DayView: View
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
     
+    @State var currencyLogo = CurrencyPickerView().currency
+    
     var month: Int
     var year: Int
     
@@ -21,7 +23,7 @@ struct DayView: View
             { each in
                 if each.year == self.year && each.month == self.month
                 {
-                    Text("Day \(each.day) \(each.transaction ?? "") \(each.price.description)$ \(each.type ?? "") \(each.will ?? "")")
+                    Text("Day \(each.day) \(each.transaction ?? "") \(each.price.description) \(self.currencyLogo) \(each.type ?? "") \(each.will ?? "")")
                     .lineLimit(1)
 
                 }

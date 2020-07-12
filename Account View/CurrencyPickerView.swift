@@ -4,13 +4,11 @@
 //
 //  Created by Bishal Aryal on 20/7/1.
 //  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 
 struct CurrencyPickerView: View
 {
-    @State public var currencyLogo = "$"
+    @State public var currency: String = UserDefaults.standard.string(forKey: "curr") ?? "$"
     
     @State var isTextField = false
     
@@ -21,9 +19,10 @@ struct CurrencyPickerView: View
                 {
                     HStack
                         {
-                            TextField("Example: $, €, ¥, रू, ₹", text: $currencyLogo)
+                            TextField("Example: $, €, ¥, रू, ₹", text: $currency)
                             Spacer()
                             Button(action: {
+                                UserDefaults.standard.set(self.currency, forKey: "curr")
                                 self.isTextField = false
                             })
                             {
@@ -35,7 +34,7 @@ struct CurrencyPickerView: View
                 else {
                     HStack
                         {
-                            Text("Currency Selected : \(currencyLogo)")
+                            Text("Currency Selected : \(currency)")
                             Spacer()
                             Button(action: {
                                 self.isTextField = true

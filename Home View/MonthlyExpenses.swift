@@ -50,8 +50,9 @@ struct MonthlyExpenses: View
                                     {
                                         Spacer()
                                         
-                                        Text("\(self.listOfMonthlyExpenses()[eachMonth].description)")
+                                        Text(String(self.listOfMonthlyExpenses()[eachMonth].description))
                                             .font(.system(size: UIScreen.main.bounds.width / 40, design: .serif))
+                                            .fontWeight(.bold)
                                             .rotationEffect(.degrees(-45))
                                             .fixedSize(horizontal: true, vertical: true)
                                         
@@ -76,7 +77,7 @@ struct MonthlyExpenses: View
                     
                 }
                 .padding()
-                .frame(maxWidth: UIScreen.main.bounds.width / 1.1, maxHeight: UIScreen.main.bounds.height / 3.5)
+                .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3)
                 .foregroundColor(Color.init(red: 230 / 255, green: 95 / 255, blue: 85 / 255).opacity(0.8))
                 .background(Color.secondary.opacity(0.2))
                 .cornerRadius(10)
@@ -149,6 +150,11 @@ struct MonthlyExpenses: View
         if number > 1000
         {
             result = String((number / 1000).description) + "k"
+        }
+        
+        if number > 1000000
+        {
+            result = String((number / 1000).description) + "m"
         }
         
         return result

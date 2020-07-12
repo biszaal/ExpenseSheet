@@ -30,9 +30,10 @@ struct NewTransactionView: View
     @State var buttonTapped: Int = 0
     @State var keyboardType:UIKeyboardType = .default
     
-    @State var viewSaved = false  // shows text "Saved"
+    @State var viewMessage: Bool = false  // shows top message
+    @State var viewMessageColor: Color = .white
     
-    @State var userInput = ""
+    @State var userInput: String = ""
     @State var transaction: String = "-"
     @State var service: String = "-"
     @State var price: Float = 0
@@ -47,6 +48,9 @@ struct NewTransactionView: View
     @State var year: Int = 0
     @State var month: Int = 0
     @State var day: Int = 0
+    
+    //top message
+    @State var message: String = "Saved."
     
     
     var body: some View
@@ -86,6 +90,8 @@ struct NewTransactionView: View
                                             .opacity(0.5))
                                 }
                         }
+                        
+                        Spacer()
                         
                         Text(instruction)
                             .foregroundColor(.black)
@@ -197,8 +203,6 @@ struct NewTransactionView: View
                                 .cornerRadius(30)
                         }
                         
-                        Spacer()
-                        
                         // MARK: - Next Button
                         Button(action: {
                             if(self.isCustomDate) {
@@ -234,12 +238,18 @@ struct NewTransactionView: View
                                 
                             else if(self.buttonTapped == 2)
                             {
-                                if !(self.userInput == "")
+                                if !(self.userInput == "") && Int(self.userInput)! <= 1000000
                                 {
                                     self.price = Float(self.userInput) ?? 0
                                     self.instruction = "What did you use?"
                                     self.showView = "credit or debit"  //hide the textfield
                                     self.buttonTapped += 1
+                                } else if Int(self.userInput)! > 1000000
+                                {
+                                    self.viewMessage = true
+                                    self.viewMessageColor = .red
+                                    self.message = "Digit Limit Exceeded"
+                                    
                                 }
                             }
                                 
@@ -280,25 +290,28 @@ struct NewTransactionView: View
                                 self.buttonTapped = 0
                                 if self.will == "-"
                                 { self.will = "Want" }
-                                self.viewSaved = true
+                                self.viewMessage = true
+                                self.viewMessageColor = .white
+                                self.message = "Saved."
                                 self.addItem()
                                 self.isCustomDate = false
+                                self.costumeDateView = true
                                 
                             }
                         }) {
                             Text(nextButton)
                                 .font(.system(size: 20, design: .serif))
                                 .foregroundColor(.white)
-                                .padding()
                                 .frame(width: UIScreen.main.bounds.width / 4 , height: UIScreen.main.bounds.height / 20)
                                 .background(Color.init(red: 254 / 255, green: 95 / 255, blue: 85 / 255).opacity(0.8))
                                 .cornerRadius(20)
                                 .shadow(radius: 20)
+                                .padding()
                         }
                         
                 }
                 .padding()
-                .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
+                .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 2.8)
                 .background(
                     ZStack
                         {
@@ -315,17 +328,21 @@ struct NewTransactionView: View
                 
                 
                 // MARK: - "Saved" View
-                if self.viewSaved
+                if self.viewMessage
                 {
-                    Text("Saved.")
-                        .font(.system(size: 40, design: .serif))
-                        .foregroundColor(.white)
+                    Text(self.message)
+                    .lineLimit(1)
+                        .font(.system(size: UIScreen.main.bounds.width / 10, design: .serif))
+                        .foregroundColor(self.viewMessageColor)
+                        .padding()
+                        .background(Color.secondary.opacity(0.7))
+                        .cornerRadius(20)
                         .shadow(radius: 20)
-                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 5)
+                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 6)
                         .onAppear()
                             {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {   // shows for only 2 seconds
-                                    self.viewSaved = false
+                                    self.viewMessage = false
                                 }
                     }
                 }

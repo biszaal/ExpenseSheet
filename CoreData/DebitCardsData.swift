@@ -13,7 +13,7 @@ extension DebitCardsData {
         
         let request: NSFetchRequest<DebitCardsData> = DebitCardsData.fetchRequest() as! NSFetchRequest<DebitCardsData>
         
-        request.sortDescriptors = []
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \DebitCardsData.debitCards, ascending: true)]
         
         return request
     }

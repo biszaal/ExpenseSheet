@@ -52,7 +52,7 @@ struct ContentView: View
                         }
                         Spacer()
                         GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 15)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 14)
                         
                 }
                 .edgesIgnoringSafeArea(.bottom)
