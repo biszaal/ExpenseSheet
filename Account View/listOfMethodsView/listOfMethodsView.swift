@@ -24,9 +24,3 @@ struct listOfMethodsView: View {
         .padding(.bottom, UIScreen.main.bounds.height / 10)
     }
 }
-
-struct listOfMethodsView_Previews: PreviewProvider {
-    static var previews: some View {
-        listOfMethodsView()
-    }
-}

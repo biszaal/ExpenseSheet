@@ -62,12 +62,13 @@ struct MonthlyExpenses: View
                                         Text(self.monthToString(month: eachMonth + 1))
                                             .font(.system(size: UIScreen.main.bounds.width / 40, design: .serif))
                                             .fixedSize(horizontal: true, vertical: true)
+                                        .animation(nil)
                                 }
                             }
                         .onAppear
                                 {
-                                    withAnimation(.linear(duration: 1))
-                                        {
+                                    withAnimation(.linear(duration: 0.5))
+                                    {
                                     self.heightOfBar = 1
                                     }
                             }

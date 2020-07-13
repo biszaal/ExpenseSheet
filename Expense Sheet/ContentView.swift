@@ -8,7 +8,6 @@
 
 import SwiftUI
 import CoreData
-import CloudKit
 
 struct ContentView: View
 {
@@ -17,7 +16,7 @@ struct ContentView: View
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
     
-    @State var hideSplashScreen = NSUbiquitousKeyValueStore().bool(forKey: "splash")
+    @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash")
     
     var body: some View
     {
@@ -29,25 +28,25 @@ struct ContentView: View
                             {
                                 Home().tabItem
                                     {
-                                        Image(systemName: "house.fill").font(.title)
+                                        Image(systemName: "house.fill")
                                         Text("Home")
                                 }
                                 
                                 AnalyticsView().tabItem
                                     {
-                                        Image(systemName: "chart.pie.fill").font(.title)
+                                        Image(systemName: "chart.pie.fill")
                                         Text("Analytics")
                                 }
                                 
                                 YearView().tabItem
                                     {
-                                        Image(systemName: "folder.fill").font(.title)
+                                        Image(systemName: "folder.fill")
                                         Text("Reports")
                                 }
                                 
                                 AccountView().tabItem
                                     {
-                                        Image(systemName: "person.fill").font(.title)
+                                        Image(systemName: "person.fill")
                                         Text("Account")
                                 }
                         }
@@ -59,7 +58,7 @@ struct ContentView: View
                 .edgesIgnoringSafeArea(.bottom)
                 
                 // only runs when the app lunchs for the first time
-                if !self.hideSplashScreen
+                if self.hideSplashScreen
                 {
                     VStack
                         {
@@ -70,10 +69,10 @@ struct ContentView: View
                             }
                             
                             Button(action: {
-                                self.hideSplashScreen = true
-                                NSUbiquitousKeyValueStore().set(self.hideSplashScreen, forKey: "splash")
+                                self.hideSplashScreen.toggle()
+                                UserDefaults.standard.set(self.hideSplashScreen, forKey: "splash")
                             }) {
-                                Text("Continue")
+                                Text("Finish")
                                     .padding()
                             }
                     }
@@ -92,23 +91,56 @@ struct ContentView: View
         
         for creditCard in defaultCreditCards
         {
-            let value = CreditCardsData(context: self.managedObjectContext)
-            value.creditCards = creditCard
-            try? self.managedObjectContext.save()
+            var exist = false
+            for each in self.creditCardsData
+            {
+                if each.creditCards == creditCard
+                {
+                    exist = true
+                }
+            }
+            if !exist
+            {
+                let value = CreditCardsData(context: self.managedObjectContext)
+                value.creditCards = creditCard
+                try? self.managedObjectContext.save()
+            }
         }
         
         for debitCard in defaultDebitCards
         {
-            let value = DebitCardsData(context: self.managedObjectContext)
-            value.debitCards = debitCard
-            try? self.managedObjectContext.save()
+            var exist = false
+            for each in self.debitCardsData
+            {
+                if each.debitCards == debitCard
+                {
+                    exist = true
+                }
+            }
+            if !exist
+            {
+                let value = DebitCardsData(context: self.managedObjectContext)
+                value.debitCards = debitCard
+                try? self.managedObjectContext.save()
+            }
         }
         
         for service in defaultServices
         {
-            let value = ServicesData(context: self.managedObjectContext)
-            value.services = service
-            try? self.managedObjectContext.save()
+            var exist = false
+            for each in self.servicesData
+            {
+                if each.services == service
+                {
+                    exist = true
+                }
+            }
+            if !exist
+            {
+                let value = ServicesData(context: self.managedObjectContext)
+                value.services = service
+                try? self.managedObjectContext.save()
+            }
         }
         
     }

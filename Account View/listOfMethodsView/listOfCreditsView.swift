@@ -16,6 +16,7 @@ struct listOfCreditsView: View
     
     @State var newCreditCard: String = ""
     @State var userInput: String = "Type the name of your Credit Card"
+    @State var showAlert: Bool = false
     
     var body: some View
     {
@@ -28,14 +29,32 @@ struct listOfCreditsView: View
                         Spacer()
                         
                         Button(action: {
-                            if !self.newCreditCard.isEmpty {
-                                let data = CreditCardsData(context: self.managedObjectContext)
-                                data.creditCards = self.newCreditCard
-                                self.newCreditCard = ""
-                                
-                                if data.hasChanges
+                            self.newCreditCard = self.newCreditCard.trimmingCharacters(in: .whitespacesAndNewlines)
+                            
+                            if !self.newCreditCard.isEmpty
+                            {
+                                var exist = false
+                                for each in self.creditCardsData
                                 {
-                                    try? self.managedObjectContext.save()
+                                    if each.creditCards == self.newCreditCard
+                                    {
+                                        exist = true
+                                    }
+                                }
+                                if !exist
+                                {
+                                    let data = CreditCardsData(context: self.managedObjectContext)
+                                    data.creditCards = self.newCreditCard
+                                    self.newCreditCard = ""
+                                    
+                                    if data.hasChanges
+                                    {
+                                        try? self.managedObjectContext.save()
+                                    }
+                                }
+                                else
+                                {
+                                    self.showAlert = true
                                 }
                             }
                         })
@@ -59,5 +78,10 @@ struct listOfCreditsView: View
                     
                 }
         }
+        .alert(isPresented: $showAlert)
+        {
+            Alert(title: Text("Already Exists"), message: Text("Item cannot be added because it already exists."), dismissButton: .default(Text("OK")))
+        }
+        
     }
 }

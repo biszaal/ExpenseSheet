@@ -20,7 +20,8 @@ struct AnalyticsView: View
                 Text("Analytics")
                     .font(.system(size: 30, design: .serif))
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
+                    .colorInvert()
                     .padding()
                     .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
@@ -60,20 +61,6 @@ struct AnalyticsView: View
                         }
                 }
         }
-        .background(
-            ZStack
-                {
-                    Image("background")
-                        .resizable()
-                        .opacity(0.5)
-            }
-        )
         .edgesIgnoringSafeArea(.top)
-    }
-}
-
-struct AnalyticsView_Previews: PreviewProvider {
-    static var previews: some View {
-        AnalyticsView()
     }
 }

@@ -19,37 +19,42 @@ struct ServicesView: View
     
     var body: some View
     {
-        ScrollView
+        ScrollView(showsIndicators: false)
+        {
+            VStack (alignment: .leading, spacing: UIScreen.main.bounds.height / 50)
             {
-                VStack (alignment: .leading, spacing: UIScreen.main.bounds.height / 50)
-                {
-                    ForEach(self.servicesData)
-                    { data in
-                        HStack
-                            {
-                                Text(data.services ?? "Empty")
+                ForEach(self.servicesData)
+                { data in
+                    HStack
+                        {
+                            Text(data.services ?? "Empty")
                                 .font(.system(size: UIScreen.main.bounds.width / 25))
                                 .lineLimit(1)
-                                
-                                Spacer()
-                                
-                                Capsule()
-                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfService(service: data.services!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
-                                    .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
-                                
-                                Text(self.tooLongInt(number: self.getPriceOfService(service: data.services!)))
-                                    .frame(maxWidth: UIScreen.main.bounds.width / 8)
-                                    .font(.system(size: UIScreen.main.bounds.width / 30))
-                        }
-                    }
-                    .onAppear
-                        {
-                            withAnimation(.linear(duration: 1))
-                            {
-                                self.lengthOfBar = 1
-                            }
+                                .animation(nil)
+                            
+                            Spacer()
+                            
+                            Capsule()
+                                .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfService(service: data.services!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
+                            
+                            
+                            Text(self.tooLongInt(number: self.getPriceOfService(service: data.services!)))
+                                .font(.system(size: UIScreen.main.bounds.width / 30))
+                                .frame(width: UIScreen.main.bounds.width / 8, alignment: .trailing)
+                                .animation(nil)
+                            
+                            
                     }
                 }
+                .onAppear
+                    {
+                        withAnimation(.linear(duration: 0.5))
+                        {
+                            self.lengthOfBar = 1
+                        }
+                }
+            }
         }
         .padding()
         .background(Color.gray.opacity(0.2))

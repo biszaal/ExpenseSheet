@@ -16,6 +16,7 @@ struct listOfServicesView: View
     
     @State var newService: String = ""
     @State var userInput: String = "Example: Food, Transportation, Rent"
+    @State var showAlert: Bool = false
     
     var body: some View
     {
@@ -31,14 +32,31 @@ struct listOfServicesView: View
                             Spacer()
                             
                             Button(action: {
+                                self.newService = self.newService.trimmingCharacters(in: .whitespacesAndNewlines)
+                                
                                 if !self.newService.isEmpty {
-                                    let data = ServicesData(context: self.managedObjectContext)
-                                    data.services = self.newService
-                                    self.newService = ""
-                                    
-                                    if data.hasChanges
+                                    var exist = false
+                                    for each in self.servicesData
                                     {
-                                        try? self.managedObjectContext.save()
+                                        if each.services == self.newService
+                                        {
+                                            exist = true
+                                        }
+                                    }
+                                    if !exist
+                                    {
+                                        let data = ServicesData(context: self.managedObjectContext)
+                                        data.services = self.newService
+                                        self.newService = ""
+                                        
+                                        if data.hasChanges
+                                        {
+                                            try? self.managedObjectContext.save()
+                                        }
+                                    }
+                                    else
+                                    {
+                                        self.showAlert = true
                                     }
                                 }
                             })
@@ -65,6 +83,10 @@ struct listOfServicesView: View
                 }
         }
         .padding(.bottom, UIScreen.main.bounds.height / 10)
+        .alert(isPresented: $showAlert)
+    {
+        Alert(title: Text("Already Exists"), message: Text("Item cannot be added because it already exists."), dismissButton: .default(Text("OK")))
+        }
     }
     
     

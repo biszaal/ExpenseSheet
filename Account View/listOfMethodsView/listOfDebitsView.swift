@@ -16,6 +16,7 @@ struct listOfDebitsView: View
     
     @State var newDebitCard: String = ""
     @State var userInput: String = "Type the name of your Debit Card"
+    @State var showAlert: Bool = false
     
     var body: some View
     {
@@ -28,14 +29,31 @@ struct listOfDebitsView: View
                         Spacer()
                         
                         Button(action: {
+                            self.newDebitCard = self.newDebitCard.trimmingCharacters(in: .whitespacesAndNewlines)
+                            
                             if !self.newDebitCard.isEmpty {
-                                let data = DebitCardsData(context: self.managedObjectContext)
-                                data.debitCards = self.newDebitCard
-                                self.newDebitCard = ""
-                                
-                                if data.hasChanges
+                                var exist = false
+                                for each in self.debitCardsData
                                 {
-                                    try? self.managedObjectContext.save()
+                                    if each.debitCards == self.newDebitCard
+                                    {
+                                        exist = true
+                                    }
+                                }
+                                if !exist
+                                {
+                                    let data = DebitCardsData(context: self.managedObjectContext)
+                                    data.debitCards = self.newDebitCard
+                                    self.newDebitCard = ""
+                                    
+                                    if data.hasChanges
+                                    {
+                                        try? self.managedObjectContext.save()
+                                    }
+                                }
+                                else
+                                {
+                                    self.showAlert = true
                                 }
                             }
                         })
@@ -59,5 +77,10 @@ struct listOfDebitsView: View
                     
                 }
         }
+        .alert(isPresented: $showAlert)
+        {
+            Alert(title: Text("Already Exists"), message: Text("Item cannot be added because it already exists."), dismissButton: .default(Text("OK")))
+        }
+        
     }
 }

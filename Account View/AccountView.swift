@@ -15,7 +15,8 @@ struct AccountView: View {
             Text("Account")
                 .font(.system(size: 30, design: .serif))
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
+                .colorInvert()
                 .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 .padding()
                 .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
@@ -53,11 +54,5 @@ struct AccountView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountView()
     }
 }

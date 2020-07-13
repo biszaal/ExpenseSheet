@@ -20,79 +20,81 @@ struct MethodsView: View
     
     var body: some View
     {
-        ScrollView
+        ScrollView(showsIndicators: false)
+        {
+            VStack (alignment: .leading, spacing: UIScreen.main.bounds.height / 50)
             {
-                VStack (alignment: .leading, spacing: UIScreen.main.bounds.height / 50)
+                Section(header:
+                    Text("Credit Cards")
+                        .font(.system(size: 15))
+                        .foregroundColor(.secondary))
                 {
-                    Section(header:
-                        Text("Credit Cards")
-                            .font(.system(size: 15))
-                            .foregroundColor(.secondary))
-                    {
-                        ForEach(self.creditCardsData)
-                        { data in
-                            HStack
-                                {
-                                    Text(data.creditCards ?? "Empty")
+                    ForEach(self.creditCardsData)
+                    { data in
+                        HStack
+                            {
+                                Text(data.creditCards ?? "Empty")
                                     .font(.system(size: UIScreen.main.bounds.width / 25))
                                     .lineLimit(1)
-                                    
-                                    Spacer()
-                                    
-                                    Capsule()
-                                        .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.creditCards!)) / CGFloat(self.maxPrice(type: "credit") + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
-                                        .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
-                                    
-                                    Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.creditCards!)))
-                                        .frame(maxWidth: UIScreen.main.bounds.width / 8)
-                                        .font(.system(size: UIScreen.main.bounds.width / 30))
-                            }
+                                    .animation(nil)
+                                
+                                Spacer()
+                                
+                                Capsule()
+                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.creditCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                    .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
+                                
+                                Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.creditCards!)))
+                                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                                    .frame(width: UIScreen.main.bounds.width / 8, alignment: .trailing)
+                                    .animation(nil)
                         }
-                        .onAppear
-                                {
-                                    withAnimation(.linear(duration: 1))
-                                        {
-                                    self.lengthOfBar = 1
-                                    }
-                            }
                     }
-                    
-                    Spacer()
-                        .frame(height: 10)
-                    
-                    Section(header:
-                        Text("Debit Cards and Cash")
-                            .font(.system(size: 15))
-                            .foregroundColor(.secondary))
-                    {
-                        ForEach(self.debitCardsData)
-                        { data in
-                            HStack
-                                {
-                                    Text(data.debitCards ?? "Empty")
-                                    .font(.system(size: UIScreen.main.bounds.width / 25))
-                                    .lineLimit(1)
-                                    
-                                    Spacer()
-                                    
-                                    Capsule()
-                                        .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.debitCards!)) / CGFloat(self.maxPrice(type: "debit") + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
-                                        .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
-                                    
-                                    Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.debitCards!)))
-                                        .frame(maxWidth: UIScreen.main.bounds.width / 8)
-                                        .font(.system(size: UIScreen.main.bounds.width / 30))
-                            }
-                        }
-                        .onAppear
-                                {
-                                    withAnimation(.linear(duration: 1))
-                                        {
-                                    self.lengthOfBar = 1
-                                    }
+                    .onAppear
+                        {
+                            withAnimation(.linear(duration: 0.5))
+                            {
+                                self.lengthOfBar = 1
                             }
                     }
                 }
+                
+                Spacer()
+                    .frame(height: 10)
+                
+                Section(header:
+                    Text("Debit Cards and Cash")
+                        .font(.system(size: 15))
+                        .foregroundColor(.secondary))
+                {
+                    ForEach(self.debitCardsData)
+                    { data in
+                        HStack
+                            {
+                                Text(data.debitCards ?? "Empty")
+                                    .font(.system(size: UIScreen.main.bounds.width / 25))
+                                    .lineLimit(1)
+                                
+                                Spacer()
+                                
+                                Capsule()
+                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.debitCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                    .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
+                                
+                                Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.debitCards!)))
+                                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                                    .frame(width: UIScreen.main.bounds.width / 8, alignment: .trailing)
+                        }
+                    }
+                    .onAppear
+                        {
+                            withAnimation(.linear(duration: 0.5))
+                            {
+                                self.lengthOfBar = 1
+                            }
+                    }
+                }
+            }
         }
         .padding()
         .background(Color.gray.opacity(0.2))
@@ -100,13 +102,11 @@ struct MethodsView: View
         .shadow(radius: 5)
     }
     
-    func maxPrice(type: String) -> Int
+    func maxPrice() -> Int
     {
         var maxPrice: Int = 0
         var eachMethodTotal: Int = 0
         
-        if type == "credit"
-        {
         for each in self.creditCardsData
         {
             eachMethodTotal = getPriceOfMethods(method: each.creditCards!)
@@ -116,21 +116,16 @@ struct MethodsView: View
                 maxPrice = eachMethodTotal
             }
         }
-        } else if type == "debit"
+        for each in self.debitCardsData
         {
-            for each in self.debitCardsData
-                   {
-                       eachMethodTotal = getPriceOfMethods(method: each.debitCards!)
-                       
-                       if eachMethodTotal > maxPrice
-                       {
-                           maxPrice = eachMethodTotal
-                       }
-                   }
+            eachMethodTotal = getPriceOfMethods(method: each.debitCards!)
+            
+            if eachMethodTotal > maxPrice
+            {
+                maxPrice = eachMethodTotal
+            }
         }
-        else {
-            print("no value")
-        }
+        
         return maxPrice
     }
     

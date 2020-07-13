@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import CloudKit
 import CoreData
 
 struct Home: View
@@ -31,7 +30,8 @@ struct Home: View
                         Text("Expense Sheet")
                             .font(.system(size: 30, design: .serif))
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
+                            .colorInvert()
                             .padding()
                             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
@@ -144,14 +144,6 @@ struct Home: View
                 }
                 
         }
-        .background(
-            ZStack
-                {
-                    Image("background")
-                        .resizable()
-                        .opacity(0.5)
-            }
-        )
             .edgesIgnoringSafeArea(.top)
     }
     
