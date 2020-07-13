@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import CloudKit
 
 struct ContentView: View
 {
@@ -16,7 +17,7 @@ struct ContentView: View
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
     
-    @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash")
+    @State var hideSplashScreen = NSUbiquitousKeyValueStore().bool(forKey: "splash")
     
     var body: some View
     {
@@ -70,7 +71,7 @@ struct ContentView: View
                             
                             Button(action: {
                                 self.hideSplashScreen = true
-                                UserDefaults.standard.set(self.hideSplashScreen, forKey: "splash")
+                                NSUbiquitousKeyValueStore().set(self.hideSplashScreen, forKey: "splash")
                             }) {
                                 Text("Continue")
                                     .padding()

@@ -14,15 +14,15 @@ struct SplashScreenView: View
     {
         ZStack
             {
-                VStack(spacing: 10)
+                VStack(spacing: 5)
                 {
                     
                     Text("Welcome to Expense Sheet App")
-                        .font(.system(size: UIScreen.main.bounds.width / 18, design: .serif))
+                        .font(.system(size: UIScreen.main.bounds.width / 20, design: .serif))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding()
-                        .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! + 10)
+                        .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! + 5)
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                         .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                     
@@ -33,8 +33,8 @@ struct SplashScreenView: View
                     {
                         listOfServicesView()
                             .cornerRadius(10)
-                            .padding()
-                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
+                            .padding(.horizontal)
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3.5)
                             .shadow(radius: 5)
                     }
                     Section(header:
@@ -44,8 +44,8 @@ struct SplashScreenView: View
                     {
                         listOfMethodsView()
                             .cornerRadius(10)
-                            .padding()
-                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
+                            .padding(.horizontal)
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3.5)
                             .shadow(radius: 5)
                     }
                     Section(header:
@@ -53,12 +53,12 @@ struct SplashScreenView: View
                             .font(.body)
                             .foregroundColor(.secondary))
                     {
-                        Form
+                        List
                             {
                                 CurrencyPickerView()
                         }
                         .cornerRadius(10)
-                        .padding()
+                        .padding(.horizontal)
                         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 8)
                         .shadow(radius: 5)
                     }

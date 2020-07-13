@@ -24,7 +24,7 @@ struct MonthlyExpenses: View
             {
                 HStack(alignment: .top)
                 {
-                    VStack(spacing: UIScreen.main.bounds.height / 30)
+                    VStack(spacing: UIScreen.main.bounds.height / 25)
                     {
                         ForEach(0..<5)
                         { each in

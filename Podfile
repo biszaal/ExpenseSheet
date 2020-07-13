@@ -7,6 +7,8 @@ target 'ExpenseSheet' do
 
 pod 'Google-Mobile-Ads-SDK'
 
+pod 'Firebase/Analytics'
+
   # Pods for ExpenseSheet
 
 end

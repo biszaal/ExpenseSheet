@@ -38,13 +38,14 @@ struct AddMoreView: View
                 })
                 {
                     Text("+ Add more")
+                        .foregroundColor(.primary)
                 }
             }
             else
             {
                 TextField("Type here", text: self.$newItem)
                 Button(action: {
-                    if !self.newItem.isEmpty {
+                    if self.newItem != "" {
                         if self.type == "service"
                         {
                             let data = ServicesData(context: self.managedObjectContext)
@@ -89,7 +90,7 @@ struct AddMoreView: View
         .fixedSize(horizontal: true, vertical: false)
         .padding()
         .frame(maxWidth: UIScreen.main.bounds.width / 1.2, maxHeight: UIScreen.main.bounds.height / 20)
-        .background(Color.primary.colorInvert())
+        .background(Color.primary.colorInvert().opacity(0.5))
         .cornerRadius(20)
     }
 }

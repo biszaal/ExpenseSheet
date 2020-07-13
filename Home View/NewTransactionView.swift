@@ -86,7 +86,8 @@ struct NewTransactionView: View
                                     .padding(.horizontal)
                                     .background(
                                         Capsule()
-                                            .fill(Color.secondary)
+                                            .fill(Color.primary)
+                                            .colorInvert()
                                             .opacity(0.5))
                                 }
                         }
@@ -97,6 +98,8 @@ struct NewTransactionView: View
                             .foregroundColor(.black)
                             .font(.headline)
                             .fontWeight(.semibold)
+                        
+                        Spacer()
                         
                         // MARK: - Different Views
                         if (showView == "text field")
@@ -120,7 +123,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.white)
+                            .background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
                             AddMoreView(type: "service")
@@ -133,7 +136,6 @@ struct NewTransactionView: View
                                 .keyboardType(.numberPad)
                                 .padding()
                                 .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .background(Color.white)
                                 .cornerRadius(30)
                         } else if (showView == "credit or debit")
                         {
@@ -145,7 +147,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.white)
+                            .background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "method")
                         {
@@ -169,7 +171,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.white)
+                            .background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
                             if type == "Credit"
@@ -191,7 +193,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.white)
+                            .background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "add date")
                         {
@@ -199,7 +201,7 @@ struct NewTransactionView: View
                                 .labelsHidden()
                                 .padding()
                                 .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .background(Color.white)
+                                .background(Color.primary.colorInvert().opacity(0.5))
                                 .cornerRadius(30)
                         }
                         

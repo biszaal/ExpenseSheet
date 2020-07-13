@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         return true
     }
@@ -49,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let description = container.persistentStoreDescriptions.first else {
             fatalError("No Descriptions Found")
         }
-
+        
         description.setOption(true as NSObject, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -92,12 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
     @objc
     func processUpdate(notification: NSNotification) {
         operationQueue.addOperation {
             // process notification
-
+            
             // get out context
             let context = self.persistentContainer.newBackgroundContext()
             context.performAndWait {
@@ -109,14 +112,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let nserror = error as NSError
                     fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
                 }
-
+                
                 // recorder item
                 items.enumerated().forEach { index, item in
                     if item.order != index {
                         item.order = Int16(index)
                     }
                 }
-
+                
                 // save if we need to save
                 if context.hasChanges {
                     do {
@@ -127,16 +130,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-
+            
         }
     }
-
-
+    
+    
     lazy var operationQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
-
+    
 }
 
