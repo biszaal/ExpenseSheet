@@ -16,7 +16,7 @@ struct ContentView: View
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
     
-    @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash")
+    @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash") // default value is false 
     
     var body: some View
     {
@@ -50,15 +50,11 @@ struct ContentView: View
                                         Text("Account")
                                 }
                         }
-                        Spacer()
-                        GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 14)
                         
                 }
-                .edgesIgnoringSafeArea(.bottom)
                 
                 // only runs when the app lunchs for the first time
-                if self.hideSplashScreen
+                if !self.hideSplashScreen
                 {
                     VStack
                         {

@@ -130,7 +130,7 @@ struct SplashScreenView: View
                             }
                     }
                 }
-                .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.top)
         }
         
     }

@@ -44,7 +44,7 @@ struct YearView: View
                     .navigationBarTitle("Years", displayMode: .inline)
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
     }
     
     func listOfYears() -> [Int]

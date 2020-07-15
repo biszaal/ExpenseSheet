@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		452C979CDF2984B5E2EC6951 /* Pods_ExpenseSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C3FB41412CD6E18987CC30 /* Pods_ExpenseSheet.framework */; };
 		614E2BCD24ABDAEC00B7134B /* CurrencyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E2BCC24ABDAEC00B7134B /* CurrencyPickerView.swift */; };
-		615B860924BC4DA800FFE60A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615B860824BC4DA800FFE60A /* GoogleService-Info.plist */; };
+		615B860D24BDE4B900FFE60A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615B860C24BDE4B900FFE60A /* GoogleService-Info.plist */; };
 		6163295F248C4F65002B77A2 /* listOfCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6163295E248C4F65002B77A2 /* listOfCreditsView.swift */; };
 		61632962248C501E002B77A2 /* listOfDebitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61632961248C501E002B77A2 /* listOfDebitsView.swift */; };
 		61632964248C516C002B77A2 /* listOfMethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61632963248C516C002B77A2 /* listOfMethodsView.swift */; };
@@ -50,7 +50,7 @@
 		1BF1996556DD5EAFBAD9E0E0 /* Pods-Expense Sheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Sheet.release.xcconfig"; path = "Target Support Files/Pods-Expense Sheet/Pods-Expense Sheet.release.xcconfig"; sourceTree = "<group>"; };
 		59526B5A41B841F8A683142A /* Pods-ExpenseSheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseSheet.debug.xcconfig"; path = "Target Support Files/Pods-ExpenseSheet/Pods-ExpenseSheet.debug.xcconfig"; sourceTree = "<group>"; };
 		614E2BCC24ABDAEC00B7134B /* CurrencyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerView.swift; sourceTree = "<group>"; };
-		615B860824BC4DA800FFE60A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		615B860C24BDE4B900FFE60A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6163295E248C4F65002B77A2 /* listOfCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfCreditsView.swift; sourceTree = "<group>"; };
 		61632961248C501E002B77A2 /* listOfDebitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfDebitsView.swift; sourceTree = "<group>"; };
 		61632963248C516C002B77A2 /* listOfMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfMethodsView.swift; sourceTree = "<group>"; };
@@ -203,10 +203,10 @@
 			children = (
 				61A24C9324A6D9C000660696 /* AdMobs */,
 				6163296B248C863F002B77A2 /* SplashScreenView */,
-				61862916248B21D0008F396A /* Account View */,
-				61862913248AC94D008F396A /* Reports View */,
-				6174BF26248467DD009BA698 /* Analytics View */,
 				6174BF232484667D009BA698 /* Home View */,
+				6174BF26248467DD009BA698 /* Analytics View */,
+				61862913248AC94D008F396A /* Reports View */,
+				61862916248B21D0008F396A /* Account View */,
 				61BF22832481ACB80093D867 /* Expense Sheet */,
 				61C56CBE2481E2A70044D12F /* CoreData */,
 				61BF22822481ACB80093D867 /* Products */,
@@ -232,7 +232,7 @@
 				61BF228B2481ACB80093D867 /* ContentView.swift */,
 				61BF228D2481ACB90093D867 /* Assets.xcassets */,
 				61BF22922481ACB90093D867 /* LaunchScreen.storyboard */,
-				615B860824BC4DA800FFE60A /* GoogleService-Info.plist */,
+				615B860C24BDE4B900FFE60A /* GoogleService-Info.plist */,
 				61BF22952481ACB90093D867 /* Info.plist */,
 				61BF228F2481ACB90093D867 /* Preview Content */,
 			);
@@ -332,7 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61BF22942481ACB90093D867 /* LaunchScreen.storyboard in Resources */,
-				615B860924BC4DA800FFE60A /* GoogleService-Info.plist in Resources */,
+				615B860D24BDE4B900FFE60A /* GoogleService-Info.plist in Resources */,
 				61BF22912481ACB90093D867 /* Preview Assets.xcassets in Resources */,
 				61BF228E2481ACB90093D867 /* Assets.xcassets in Resources */,
 			);

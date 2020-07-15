@@ -26,27 +26,44 @@ struct Home: View
             {
                 VStack
                     {
-                        
+                        HStack
+                            {
                         Text("Expense Sheet")
                             .font(.system(size: 30, design: .serif))
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .colorInvert()
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    
+                                    withAnimation {
+                                        self.showTransactionView.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "plus")
+                                        .font(.system(size: UIScreen.main.bounds.width / 13.5))
+                                        .foregroundColor(.white)
+                                        .background(
+                                            Circle()
+                                                .fill(Color.blue)
+                                                .padding()
+                                                .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.height / 10)
+                                    )
+                                        .padding(.horizontal)
+                                }
+                        }
                             .padding()
                             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                             .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                         
-                        Spacer()
-                            .frame(height: UIScreen.main.bounds.height / 100)
-                        
-                        
-                        
                         RecentDataListView()
                         .cornerRadius(10)
                         .padding()
                         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
-                        .shadow(radius: 5)
+                            .shadow(radius: 5)
                         
                         VStack
                             {
@@ -101,28 +118,12 @@ struct Home: View
                                     Spacer()
                                         .frame(height: UIScreen.main.bounds.height / 40)
                                 }
+                                
+                                GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 18)
                         }
                         
                 }
-                
-                Button(action: {
-                    
-                    withAnimation {
-                        self.showTransactionView.toggle()
-                    }
-                }) {
-                    Image(systemName: "plus")
-                        .font(.system(size: UIScreen.main.bounds.width / 13.5))
-                        .foregroundColor(.white)
-                        .background(
-                            Circle()
-                                .fill(Color.blue)
-                                .padding()
-                                .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.height / 10)
-                    )
-                        .padding()
-                }
-                .position(x: UIScreen.main.bounds.width - (UIScreen.main.bounds.width / 8), y: UIScreen.main.bounds.height / 13)
                 
                 
                 if self.showTransactionView

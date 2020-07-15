@@ -33,7 +33,7 @@ struct NewTransactionView: View
     @State var viewMessage: Bool = false  // shows top message
     @State var viewMessageColor: Color = .white
     
-    @State var userInput: String = ""
+    @State var userInput: String = String("".prefix(19))
     @State var transaction: String = "-"
     @State var service: String = "-"
     @State var price: Float = 0
@@ -123,7 +123,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.primary.colorInvert().opacity(0.5))
+                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
                             AddMoreView(type: "service")
@@ -147,7 +147,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.primary.colorInvert().opacity(0.5))
+                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "method")
                         {
@@ -171,7 +171,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.primary.colorInvert().opacity(0.5))
+                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
                             if type == "Credit"
@@ -193,7 +193,7 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .background(Color.primary.colorInvert().opacity(0.5))
+                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "add date")
                         {
@@ -201,7 +201,7 @@ struct NewTransactionView: View
                                 .labelsHidden()
                                 .padding()
                                 .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .background(Color.primary.colorInvert().opacity(0.5))
+                                //.background(Color.primary.colorInvert().opacity(0.5))
                                 .cornerRadius(30)
                         }
                         
@@ -246,7 +246,7 @@ struct NewTransactionView: View
                                     self.instruction = "What did you use?"
                                     self.showView = "credit or debit"  //hide the textfield
                                     self.buttonTapped += 1
-                                } else if Int(self.userInput)! > 1000000
+                                } else if Int(self.userInput) ?? 0 > 1000000
                                 {
                                     self.viewMessage = true
                                     self.viewMessageColor = .red

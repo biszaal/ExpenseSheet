@@ -15,7 +15,7 @@ struct AnalyticsView: View
     var body: some View
     {
         
-        VStack
+        VStack()
             {
                 Text("Analytics")
                     .font(.system(size: 30, design: .serif))
@@ -26,6 +26,7 @@ struct AnalyticsView: View
                     .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
+
                 
                 VStack
                     {
