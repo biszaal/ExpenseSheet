@@ -10,6 +10,8 @@ struct WillChart: View
         {
             VStack(alignment: .leading)
             {
+                Spacer()
+                
                 if !infoView
                 {
                     ChartView(kinds: ["need", "want"])
@@ -17,12 +19,13 @@ struct WillChart: View
                     
                     Spacer()
                     
-                    Text("Will")
-                        .font(.headline)
-                        .fontWeight(.bold)
                     
                     VStack(alignment: .leading)
                     {
+                        Text("Necessity")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        
                         HStack
                             {
                                 Rectangle()
@@ -42,11 +45,12 @@ struct WillChart: View
                                     .fixedSize(horizontal: true, vertical: false)
                         }
                     }
+                    
                 }
                 else {
                     ScrollView(showsIndicators: false)
                         {
-                            Text("This chart will helps you keep track of purchases you make which are necessary such as food rent and which are not so necassary which can be anything that you can live and survive without. This is very crutial to prevent our overspending because sometime we tend to spend our money on unnecassary products. Exprets say we should spend 40% on Need, 30% on Want and rest for saving or investment.")
+                            Text("This chart will helps you keep track of purchases you make which are necessary such as food rent and which are not so necassary which can be anything that you can live and survive without. This is very crutial to prevent our overspending because sometime we tend to spend our money on unnecassary products. Exprets say we should spend 50% on Need, 30% on Want and rest on saving and investing.")
                                 .font(.system(size: 15))
                                 .foregroundColor(.secondary)
                                 .padding(.bottom)
@@ -55,7 +59,7 @@ struct WillChart: View
                 }
             }
             .padding()
-            .frame(width: UIScreen.main.bounds.width / 2.1, height: UIScreen.main.bounds.height / 3.2)
+            .frame(width: UIScreen.main.bounds.width / 2.1)
             .background(Color.gray.opacity(0.2))
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -70,7 +74,7 @@ struct WillChart: View
             })
             {
                 Image(systemName: "info.circle.fill")
-                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                    .font(.system(size: 15))
                     .padding()
                     .foregroundColor(.secondary)
                     .frame(alignment: .topTrailing)

@@ -1,11 +1,3 @@
-//
-//  NewTransactionView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 5/30/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CloudKit
 import CoreData
@@ -17,7 +9,7 @@ struct NewTransactionView: View
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
-    @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
+    @FetchRequest(fetchRequest: CategoriesData.getCategoriesData()) var categoriesData: FetchedResults<CategoriesData>
     @FetchRequest(fetchRequest: CreditCardsData.getCreditCardsData()) var creditCardsData: FetchedResults<CreditCardsData>
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     
@@ -25,21 +17,23 @@ struct NewTransactionView: View
     @State var costumeDateView: Bool = true
     
     //display states
-    @State var instruction: String = "Write the name of the Purchase."
+    @State var instruction: String = "Name of the Purchase"
     @State var nextButton: String = "Next"
     @State var buttonTapped: Int = 0
     @State var keyboardType:UIKeyboardType = .default
     
     @State var viewMessage: Bool = false  // shows top message
-    @State var viewMessageColor: Color = .white
     
-    @State var userInput: String = String("".prefix(19))
-    @State var transaction: String = "-"
-    @State var service: String = "-"
+    // for text manager
+    @ObservedObject var textFieldManager = TextFieldManager(charLimit: 19)      //this is text limiter for the textField
+    @ObservedObject var textFieldManagerForPrice = TextFieldManager(charLimit: 7)
+    @State var userInput: String = ""
+    @State var transaction: String = ""
+    @State var category: String = ""
     @State var price: Float = 0
-    @State var type: String = "-"
-    @State var method: String = "-"
-    @State var will: String = "-"
+    @State var type: String = ""
+    @State var method: String = ""
+    @State var will: String = ""
     
     //if Custom Date
     @State var maxDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
@@ -50,8 +44,7 @@ struct NewTransactionView: View
     @State var day: Int = 0
     
     //top message
-    @State var message: String = "Saved."
-    
+    @State var message: String = "Saved"
     
     var body: some View
     {
@@ -68,13 +61,10 @@ struct NewTransactionView: View
                                 {
                                     Button(action:
                                         {
-                                            withAnimation
-                                                {
-                                                    self.isCustomDate = true
-                                                    self.instruction = "Select a Date"
-                                                    self.showView = "add date"
-                                                    self.nextButton = "Done"
-                                            }
+                                            self.isCustomDate = true
+                                            self.instruction = "Select a Date"
+                                            self.showView = "add date"
+                                            self.nextButton = "Done"
                                     }) {
                                         Image(systemName: "calendar")
                                         Text("Add Date")
@@ -101,36 +91,35 @@ struct NewTransactionView: View
                         
                         Spacer()
                         
-                        // MARK: - Different Views
+                        // MARK: - Transaction Views
                         if (showView == "text field")
                         {
-                            TextField("Type Here", text: self.$userInput)
+                            TextField("Type Here", text: self.$textFieldManager.text)
                                 .foregroundColor(.secondary)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.default)
                                 .padding()
                                 .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
                                 .cornerRadius(30)
-                        } else if (showView == "service")
+                        } else if (showView == "category")
                         {
-                            Picker(selection: $service, label: Text(""))
+                            Picker(selection: $category, label: Text(""))
                             {
-                                ForEach(self.servicesData)
+                                ForEach(self.categoriesData)
                                 { data in
-                                    Text(data.services ?? "Empty").tag(data.services ?? "Empty")
+                                    Text(data.category ?? "Unknown").tag(data.category ?? "Unknown")
                                 }
                             }
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
-                            AddMoreView(type: "service")
+                            AddMoreView(type: "category")
                             
                         } else if (showView == "price field")
                         {
-                            TextField("Cost Here", text: self.$userInput)
+                            TextField("Cost Here", text: self.$textFieldManagerForPrice.text)
                                 .foregroundColor(.secondary)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.numberPad)
@@ -147,7 +136,6 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "method")
                         {
@@ -171,7 +159,6 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                             
                             if type == "Credit"
@@ -193,7 +180,6 @@ struct NewTransactionView: View
                             .labelsHidden()
                             .padding()
                             .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            //.background(Color.primary.colorInvert().opacity(0.5))
                             .cornerRadius(30)
                         } else if (showView == "add date")
                         {
@@ -201,7 +187,6 @@ struct NewTransactionView: View
                                 .labelsHidden()
                                 .padding()
                                 .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                //.background(Color.primary.colorInvert().opacity(0.5))
                                 .cornerRadius(30)
                         }
                         
@@ -209,75 +194,76 @@ struct NewTransactionView: View
                         Button(action: {
                             if(self.isCustomDate) {
                                 self.showView = "text field"
-                                self.instruction = "Write the name of the Purchase."
-                                self.nextButton = "Next"
+                                self.instruction = "Name of the Purchase."
+                                self.nextButton = "Next"  // after clicking done will take you back to name of the purchase
                             }
                             
                             if(self.buttonTapped == 0)
                             {
+                                self.userInput = self.textFieldManager.text
                                 if !(self.userInput == "")
                                 {
                                     self.transaction = self.userInput
-                                    self.showView = "service"
+                                    self.showView = "category"
                                     self.userInput = ""
-                                    self.instruction = "Choose type of the service."
+                                    self.textFieldManager.text = ""
+                                    self.instruction = "Category"
                                     self.buttonTapped += 1
-                                    self.costumeDateView = false  // only show costumedate option on the first view
+                                    self.costumeDateView = false  // disable costume date option after the first view
                                 }
                             }
                                 
                             else if(self.buttonTapped == 1)
                             {
-                                if self.service == "-"
+                                if self.category == ""
                                 {
-                                    self.service = self.servicesData[0].services ?? "Unknown"
-                                }
-                                self.showView = "price field"
+                                    self.category = self.categoriesData[0].category ?? "Unknown"
+                                } // setting default
                                 self.userInput = ""
-                                self.instruction = "Type the price of that item."
+                                self.textFieldManager.text = ""
+                                self.showView = "price field"
+                                self.instruction = "Price"
                                 self.buttonTapped += 1
                             }
                                 
                             else if(self.buttonTapped == 2)
                             {
-                                if !(self.userInput == "") && Int(self.userInput)! <= 1000000
+                                self.userInput = self.textFieldManagerForPrice.text
+                                if !(self.userInput == "")
                                 {
                                     self.price = Float(self.userInput) ?? 0
-                                    self.instruction = "What did you use?"
+                                    self.userInput = ""
+                                    self.textFieldManager.text = ""
+                                    self.instruction = "Payment Type"
                                     self.showView = "credit or debit"  //hide the textfield
                                     self.buttonTapped += 1
-                                } else if Int(self.userInput) ?? 0 > 1000000
-                                {
-                                    self.viewMessage = true
-                                    self.viewMessageColor = .red
-                                    self.message = "Digit Limit Exceeded"
                                     
                                 }
                             }
                                 
                             else if(self.buttonTapped == 3)
                             {
-                                if self.type == "-"
-                                { self.type = "Credit" }
-                                self.instruction = "Choose your Payment Method."
+                                if self.type == ""
+                                { self.type = "Credit" } // setting default
+                                self.instruction = "Payment Method"
                                 self.showView = "method"
                                 self.buttonTapped += 1
                             }
                                 
                             else if(self.buttonTapped == 4)
                             {
-                                if self.method == "-"
+                                if self.method == ""
                                 {
                                     if self.type == "Credit"
                                     {
-                                        self.method = self.creditCardsData[0].creditCards ?? "-"
+                                        self.method = self.creditCardsData[0].creditCards ?? ""
                                     }
                                     else if self.type == "Debit"
                                     {
-                                        self.method = self.debitCardsData[0].debitCards ?? "-"
+                                        self.method = self.debitCardsData[0].debitCards ?? ""
                                     }
-                                }
-                                self.instruction = "Do you wanted it or needed it?"
+                                } // setting default
+                                self.instruction = "Necessity"
                                 self.nextButton = "Save"
                                 self.showView = "want or need"
                                 self.buttonTapped += 1
@@ -289,11 +275,11 @@ struct NewTransactionView: View
                                 self.nextButton = "Next"
                                 self.showView = "text field"
                                 self.userInput = ""
+                                self.textFieldManager.text = ""
                                 self.buttonTapped = 0
-                                if self.will == "-"
-                                { self.will = "Want" }
+                                if self.will == ""
+                                { self.will = "Want" } // setting default
                                 self.viewMessage = true
-                                self.viewMessageColor = .white
                                 self.message = "Saved."
                                 self.addItem()
                                 self.isCustomDate = false
@@ -335,7 +321,8 @@ struct NewTransactionView: View
                     Text(self.message)
                     .lineLimit(1)
                         .font(.system(size: UIScreen.main.bounds.width / 10, design: .serif))
-                        .foregroundColor(self.viewMessageColor)
+                        .foregroundColor(.primary)
+                        .colorInvert()
                         .padding()
                         .background(Color.secondary.opacity(0.7))
                         .cornerRadius(20)
@@ -357,7 +344,7 @@ struct NewTransactionView: View
         let value = TransactionData(context: self.managedObjectContext)
         
         value.transaction = self.transaction
-        value.service = self.service
+        value.category = self.category
         value.price = self.price
         value.method = self.method
         value.type = self.type

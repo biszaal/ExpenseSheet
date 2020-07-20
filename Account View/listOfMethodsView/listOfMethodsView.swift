@@ -21,6 +21,5 @@ struct listOfMethodsView: View {
                     listOfDebitsView()
                 }
         }
-        .padding(.bottom, UIScreen.main.bounds.height / 10)
     }
 }

@@ -14,7 +14,7 @@ struct ContentView: View
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: CreditCardsData.getCreditCardsData()) var creditCardsData: FetchedResults<CreditCardsData>
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
-    @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
+    @FetchRequest(fetchRequest: CategoriesData.getCategoriesData()) var categoriesData: FetchedResults<CategoriesData>
     
     @State var hideSplashScreen = UserDefaults.standard.bool(forKey: "splash") // default value is false 
     
@@ -72,7 +72,7 @@ struct ContentView: View
                                     .padding()
                             }
                     }
-                    .background(Color.white)
+                    .background(Color.primary.colorInvert())
                 }
         }
     }
@@ -81,7 +81,7 @@ struct ContentView: View
     func storeDefaultValue ()
     {
         
-        let defaultServices = ["Food", "Education", "Transportation", "Bills", "Entertainment"]
+        let defaultCategories = ["Food", "Education", "Transportation", "Bills", "Entertainment"]
         let defaultCreditCards = ["Visa", "Master Card"]
         let defaultDebitCards = ["Cash"]
         
@@ -121,20 +121,20 @@ struct ContentView: View
             }
         }
         
-        for service in defaultServices
+        for category in defaultCategories
         {
             var exist = false
-            for each in self.servicesData
+            for each in self.categoriesData
             {
-                if each.services == service
+                if each.category == category
                 {
                     exist = true
                 }
             }
             if !exist
             {
-                let value = ServicesData(context: self.managedObjectContext)
-                value.services = service
+                let value = CategoriesData(context: self.managedObjectContext)
+                value.category = category
                 try? self.managedObjectContext.save()
             }
         }

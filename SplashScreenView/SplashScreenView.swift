@@ -26,26 +26,26 @@ struct SplashScreenView: View
                         .foregroundColor(.white)
                         .padding()
                         .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! + 5)
-                        .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                     
                     if screenView == 1
                     {
                         Section(header:
-                            Text("Enter Services")
+                            Text("Enter Categories")
                                 .font(.body)
                                 .foregroundColor(.secondary))
                         {
-                            listOfServicesView()
+                            listOfCategoriesView()
                                 .cornerRadius(10)
                                 .padding(.horizontal)
                                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 2)
                                 .shadow(radius: 5)
                         }
                         .onAppear()
-                        {
-                            self.viewBackButton = false
-                            self.viewNextButton = true
+                            {
+                                self.viewBackButton = false
+                                self.viewNextButton = true
                         }
                     }
                     
@@ -62,16 +62,16 @@ struct SplashScreenView: View
                                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 2)
                                 .shadow(radius: 5)
                         }
-                    .onAppear()
-                        {
-                            self.viewBackButton = true
-                            self.viewNextButton = true
+                        .onAppear()
+                            {
+                                self.viewBackButton = true
+                                self.viewNextButton = true
                         }
                     }
                     if screenView == 3
                     {
                         Section(header:
-                            Text("Enter Your Currency Symbol")
+                            Text("Enter Your Currency Symbol.")
                                 .font(.body)
                                 .foregroundColor(.secondary))
                         {
@@ -83,10 +83,10 @@ struct SplashScreenView: View
                                 .shadow(radius: 5)
                         }
                         .padding()
-                    .onAppear()
-                        {
-                            self.viewNextButton = false
-                            self.viewBackButton = true
+                        .onAppear()
+                            {
+                                self.viewNextButton = false
+                                self.viewBackButton = true
                         }
                     }
                     

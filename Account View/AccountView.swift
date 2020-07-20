@@ -29,10 +29,10 @@ struct AccountView: View {
                             Section(header: Text("Info"))
                             {
                                 NavigationLink(
-                                    destination: listOfServicesView()
-                                        .navigationBarTitle(Text("List of Services"), displayMode: .inline))
+                                    destination: listOfCategoriesView()
+                                        .navigationBarTitle(Text("List of Categories"), displayMode: .inline))
                                 {
-                                    Text("List of Services")
+                                    Text("List of Categories")
                                 }
                                 
                                 NavigationLink(
@@ -48,11 +48,13 @@ struct AccountView: View {
                                 CurrencyPickerView()
                             }
                     }
-                    .padding(.bottom, UIScreen.main.bounds.height / 10)
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
             }
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .padding(1)
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.horizontal)
     }
 }

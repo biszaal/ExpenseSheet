@@ -1,11 +1,3 @@
-//
-//  MonthlyExpenses.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/15/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -22,26 +14,28 @@ struct MonthlyExpenses: View
     {
         VStack
             {
-                HStack(alignment: .top)
+                HStack(alignment: .bottom)
                 {
-                    VStack(spacing: UIScreen.main.bounds.height / 25)
+                    VStack(spacing: UIScreen.main.bounds.height / 33)
                     {
                         ForEach(0..<5)
                         { each in
-                            Text(self.tooLongInt(number: Int(self.getMaxPriceOfYear() - ((self.getMaxPriceOfYear() / 4) * each))))
+                            Text(self.tooLongInt(number: Float(self.getMaxPriceOfYear() - ((self.getMaxPriceOfYear() / 4) * each))))
                                 .rotationEffect(.degrees(-45))
+                                .frame(height: UIScreen.main.bounds.height / 40)
                         }
+                        
                     }
-                    .padding(.top)
+                    .padding(.vertical)
                     .foregroundColor(.primary)
-                    .font(.system(size: UIScreen.main.bounds.width / 30))
-                    .fixedSize(horizontal: true, vertical: true)
+                    .font(.system(size: 10))
+                    .fixedSize(horizontal: true, vertical: false)
                     
                     Divider()
                     
                     ScrollView(.horizontal, showsIndicators: false)
                     {
-                        HStack(alignment: .bottom, spacing: UIScreen.main.bounds.width / 20)
+                        HStack(alignment: .bottom, spacing: 30)
                         {
                             ForEach(0..<12, id: \.self)
                             { eachMonth in
@@ -51,17 +45,17 @@ struct MonthlyExpenses: View
                                         Spacer()
                                         
                                         Text(String(self.listOfMonthlyExpenses()[eachMonth].description))
-                                            .font(.system(size: UIScreen.main.bounds.width / 40, design: .serif))
+                                            .font(.system(size: 12, design: .serif))
                                             .fontWeight(.bold)
                                             .rotationEffect(.degrees(-45))
-                                            .fixedSize(horizontal: true, vertical: true)
+                                            .fixedSize(horizontal: true, vertical: false)
                                         
                                         Capsule()
-                                            .frame(width: UIScreen.main.bounds.width / 75, height: (UIScreen.main.bounds.height * CGFloat(self.listOfMonthlyExpenses()[eachMonth] / Float(self.getMaxPriceOfYear() + 1)) / 4.5) * self.heightOfBar)
+                                            .frame(width: 5, height: (UIScreen.main.bounds.height * CGFloat(self.listOfMonthlyExpenses()[eachMonth] / Float(self.getMaxPriceOfYear() + 1)) / 4.5) * self.heightOfBar)
                                         
                                         Text(self.monthToString(month: eachMonth + 1))
-                                            .font(.system(size: UIScreen.main.bounds.width / 40, design: .serif))
-                                            .fixedSize(horizontal: true, vertical: true)
+                                            .font(.system(size: 12, design: .serif))
+                                            .fixedSize(horizontal: true, vertical: false)
                                         .animation(nil)
                                 }
                             }
@@ -73,7 +67,6 @@ struct MonthlyExpenses: View
                                     }
                             }
                         }
-                        .padding()
                     }
                     
                 }
@@ -145,10 +138,10 @@ struct MonthlyExpenses: View
         return months[month - 1]
     }
     
-    func tooLongInt(number: Int) -> String// this will reduce too long integers for ex: 10,000 -> 10 k
+    func tooLongInt(number: Float) -> String// this will reduce too long integers for ex: 10,000 -> 10 k
     {
         var result: String = String(number)
-        if number > 1000
+        if number > 999
         {
             result = String((number / 1000).description) + "k"
         }

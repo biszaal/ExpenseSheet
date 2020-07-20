@@ -1,11 +1,3 @@
-//
-//  RecentData.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/1/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CloudKit
 import CoreData
@@ -30,7 +22,7 @@ struct RecentDataListView: View {
                                     {
                                         Text("\(self.transactionData[each].year)" + "/" + "\(self.transactionData[each].month)" + "/" + "\(self.transactionData[each].day)")
                                             .font(.system(size: 10))
-                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].price.description) \(self.currencyLogo), \(self.transactionData[each].type ?? "Unknown")")
+                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].category ?? "Unknown"), \(self.transactionData[each].price.description) \(self.currencyLogo), \(self.transactionData[each].type ?? "Unknown")")
                                             .font(.system(size: 15))
                                 }
                                 .lineLimit(1)

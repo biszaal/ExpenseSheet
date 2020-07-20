@@ -17,7 +17,7 @@ class TransactionData: NSManagedObject, Identifiable {
     @NSManaged public var type: String?
     @NSManaged public var price: Float
     @NSManaged public var transaction: String?
-    @NSManaged public var service: String?
+    @NSManaged public var category: String?
     @NSManaged public var method: String?
     @NSManaged public var day: Int16
     @NSManaged public var month: Int16

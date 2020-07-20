@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CurrencyPickerView: View
 {
+    
+    @ObservedObject var textFieldManager = TextFieldManager(charLimit: 5)
     @State public var currency: String = UserDefaults.standard.string(forKey: "curr") ?? "$"
     
     @State var isTextField: Bool = false
@@ -23,11 +25,15 @@ struct CurrencyPickerView: View
                 {
                     HStack
                         {
-                            TextField("Example: $, €, ¥, रू, ₹", text: $currency)
+                            TextField("Example: $, €, ¥, रू, ₹", text: $textFieldManager.text)
                             Spacer()
                             Button(action: {
-                                UserDefaults.standard.set(self.currency, forKey: "curr")
-                                self.isTextField = false
+                                self.currency = self.textFieldManager.text.trimmingCharacters(in: .whitespacesAndNewlines) // removes the empty white space
+                                if self.currency != ""
+                                {
+                                    UserDefaults.standard.set(self.currency, forKey: "curr")
+                                    self.isTextField = false
+                                }
                             })
                             {
                                 Text("Done")

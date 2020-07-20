@@ -1,11 +1,3 @@
-//
-//  ServicesView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/15/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -34,18 +26,18 @@ struct MethodsView: View
                         HStack
                             {
                                 Text(data.creditCards ?? "Empty")
-                                    .font(.system(size: UIScreen.main.bounds.width / 25))
+                                    .font(.system(size: 15))
                                     .lineLimit(1)
                                     .animation(nil)
                                 
                                 Spacer()
                                 
                                 Capsule()
-                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.creditCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.creditCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: 5)
                                     .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
                                 
-                                Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.creditCards!)))
-                                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                                Text(self.tooLongInt(number: Float(self.getPriceOfMethods(method: data.creditCards!))))
+                                    .font(.system(size: 15))
                                     .frame(width: UIScreen.main.bounds.width / 8, alignment: .trailing)
                                     .animation(nil)
                         }
@@ -72,18 +64,20 @@ struct MethodsView: View
                         HStack
                             {
                                 Text(data.debitCards ?? "Empty")
-                                    .font(.system(size: UIScreen.main.bounds.width / 25))
+                                    .font(.system(size: 15))
                                     .lineLimit(1)
+                                    .animation(nil)
                                 
                                 Spacer()
                                 
                                 Capsule()
-                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.debitCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: UIScreen.main.bounds.height / 150)
+                                    .frame(width: (UIScreen.main.bounds.width * (CGFloat(self.getPriceOfMethods(method: data.debitCards!)) / CGFloat(self.maxPrice() + 1))) / 2.7 * self.lengthOfBar, height: 5, alignment: .trailing)
                                     .foregroundColor(Color.init(red: Double.random(in: 100..<255) / 255, green: Double.random(in: 100..<255) / 255, blue: Double.random(in: 50..<200) / 255))
                                 
-                                Text(self.tooLongInt(number: self.getPriceOfMethods(method: data.debitCards!)))
-                                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                                Text(self.tooLongInt(number: Float(self.getPriceOfMethods(method: data.debitCards!))))
+                                    .font(.system(size: 15))
                                     .frame(width: UIScreen.main.bounds.width / 8, alignment: .trailing)
+                                .animation(nil)
                         }
                     }
                     .onAppear
@@ -95,6 +89,7 @@ struct MethodsView: View
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
         }
         .padding()
         .background(Color.gray.opacity(0.2))
@@ -142,15 +137,15 @@ struct MethodsView: View
         return price
     }
     
-    func tooLongInt(number: Int) -> String// this will reduce too long integers for ex: 100,000 -> 10 k
+    func tooLongInt(number: Float) -> String// this will reduce too long integers for ex: 100,000 -> 10 k
     {
         var result: String = String(number)
-        if number > 100000
+        if number > 99999
         {
             result = String((number / 1000).description) + "k"
         }
         
-        if number > 1000000
+        if number > 999999
         {
             result = String((number / 1000).description) + "m"
         }

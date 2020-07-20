@@ -1,11 +1,3 @@
-//
-//  TypeChart.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/15/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 
 struct TypeChart: View
@@ -18,6 +10,8 @@ struct TypeChart: View
         {
             VStack(alignment: .leading)
             {
+                Spacer()
+                
                 if !infoView
                 {
                     ChartView(kinds: ["credit", "debit"])
@@ -62,7 +56,7 @@ struct TypeChart: View
                 }
             }
             .padding()
-            .frame(width: UIScreen.main.bounds.width / 2.1, height: UIScreen.main.bounds.height / 3.2)
+            .frame(width: UIScreen.main.bounds.width / 2.1)
             .background(Color.gray.opacity(0.2))
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -77,7 +71,7 @@ struct TypeChart: View
             })
             {
                 Image(systemName: "info.circle.fill")
-                    .font(.system(size: UIScreen.main.bounds.width / 30))
+                    .font(.system(size: 15))
                     .padding()
                     .foregroundColor(.secondary)
                     .frame(alignment: .topTrailing)

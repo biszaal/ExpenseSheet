@@ -1,11 +1,3 @@
-//
-//  listOfServicesView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/6/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -14,6 +6,7 @@ struct listOfDebitsView: View
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     
+    @ObservedObject var textFieldManager = TextFieldManager(charLimit: 15)
     @State var newDebitCard: String = ""
     @State var userInput: String = "Type the name of your Debit Card"
     @State var showAlert: Bool = false
@@ -24,12 +17,12 @@ struct listOfDebitsView: View
             {
                 HStack
                     {
-                        TextField(self.userInput, text: self.$newDebitCard)
+                        TextField(self.userInput, text: self.$textFieldManager.text)
                         
                         Spacer()
                         
                         Button(action: {
-                            self.newDebitCard = self.newDebitCard.trimmingCharacters(in: .whitespacesAndNewlines)
+                            self.newDebitCard = self.textFieldManager.text.trimmingCharacters(in: .whitespacesAndNewlines)
                             
                             if !self.newDebitCard.isEmpty {
                                 var exist = false
@@ -44,16 +37,17 @@ struct listOfDebitsView: View
                                 {
                                     let data = DebitCardsData(context: self.managedObjectContext)
                                     data.debitCards = self.newDebitCard
-                                    self.newDebitCard = ""
+                                    self.textFieldManager.text = ""
                                     
                                     if data.hasChanges
                                     {
                                         try? self.managedObjectContext.save()
                                     }
-                                }
-                                else
+                                } else
                                 {
                                     self.showAlert = true
+                                    let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                                    impactHeavy.impactOccurred()
                                 }
                             }
                         })

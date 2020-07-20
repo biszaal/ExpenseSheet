@@ -1,14 +1,5 @@
-//
-//  ChartView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/1/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
-import CloudKit
 
 struct ChartView: View
 {
@@ -144,7 +135,7 @@ struct ChartView: View
                 
                 path.move(to: self.center)
                 
-                path.addArc(center: self.center, radius: UIScreen.main.bounds.height / 15, startAngle: .init(degrees: self.getDegreeFrom()), endAngle: .init(degrees: self.getDegreeTo()), clockwise: false)
+                path.addArc(center: self.center, radius: UIScreen.main.bounds.width / 7, startAngle: .init(degrees: self.getDegreeFrom()), endAngle: .init(degrees: self.getDegreeTo()), clockwise: false)
                 path.closeSubpath()
                 
             }

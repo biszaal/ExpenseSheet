@@ -1,16 +1,8 @@
-//
-//  AnalyticsView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/3/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 
 struct AnalyticsView: View
 {
-    @State var currentTab = "services"
+    @State var currentTab = "category"
     
     var body: some View
     {
@@ -37,22 +29,18 @@ struct AnalyticsView: View
                                 TypeChart()
                                 
                         }
-                        .frame(maxWidth: UIScreen.main.bounds.width / 1.09)
-                        
-                        Spacer()
-                            .frame(height: UIScreen.main.bounds.height / 20)
                         
                         Picker(selection: $currentTab, label: Text(""))
                         {
-                            Text("Services").tag("services")
+                            Text("Categories").tag("category")
                             Text("Payment Methods").tag("methods")
                         }
                         .padding()
                         .pickerStyle(SegmentedPickerStyle())
                         
-                        if currentTab == "services"
+                        if currentTab == "category"
                         {
-                            ServicesView()
+                            CategoriesView()
                             .padding()
                         }
                         else if currentTab == "methods"
@@ -63,5 +51,6 @@ struct AnalyticsView: View
                 }
         }
         .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.horizontal)
     }
 }

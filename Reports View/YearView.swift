@@ -1,11 +1,3 @@
-//
-//  SettingsView.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 6/6/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -43,8 +35,10 @@ struct YearView: View
                     }
                     .navigationBarTitle("Years", displayMode: .inline)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
         .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.horizontal)
     }
     
     func listOfYears() -> [Int]

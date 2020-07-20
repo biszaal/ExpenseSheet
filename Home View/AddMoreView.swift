@@ -12,11 +12,11 @@ import CoreData
 struct AddMoreView: View
 {
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
-    @FetchRequest(fetchRequest: ServicesData.getServicesData()) var servicesData: FetchedResults<ServicesData>
+    @FetchRequest(fetchRequest: CategoriesData.getCategoriesData()) var categoriesData: FetchedResults<CategoriesData>
     @FetchRequest(fetchRequest: CreditCardsData.getCreditCardsData()) var creditCardsData: FetchedResults<CreditCardsData>
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
     
-    
+    @ObservedObject var textFieldManager = TextFieldManager(charLimit: 15)
     @State var newItem: String = ""
     @State var showAddNewButton: Bool = true
     
@@ -43,37 +43,82 @@ struct AddMoreView: View
             }
             else
             {
-                TextField("Type here", text: self.$newItem)
+                TextField("Type here", text: self.$textFieldManager.text)
                 Button(action: {
+                    self.newItem = self.textFieldManager.text.trimmingCharacters(in: .whitespacesAndNewlines) // removes the empty white space
                     if self.newItem != "" {
-                        if self.type == "service"
+                        if self.type == "category"
                         {
-                            let data = ServicesData(context: self.managedObjectContext)
-                            data.services = self.newItem
-                            self.newItem = ""
-                            if data.hasChanges
+                            // so exist checks if the value is already exists in the cloud or core data, so if the value exist it will not save anything and return haptic feedback to the user
+                            var exist = false
+                            for each in self.categoriesData
                             {
-                                try? self.managedObjectContext.save()
+                                if each.category == self.newItem
+                                {
+                                    exist = true
+                                }
+                            }
+                            if !exist
+                            {
+                                let data = CategoriesData(context: self.managedObjectContext)
+                                data.category = self.newItem
+                                self.textFieldManager.text = ""
+                                if data.hasChanges
+                                {
+                                    try? self.managedObjectContext.save()
+                                }
+                            } else {
+                                let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                                impactHeavy.impactOccurred()
                             }
                         }
                         else if self.type == "credit"
                         {
-                            let data = CreditCardsData(context: self.managedObjectContext)
-                            data.creditCards = self.newItem
-                            self.newItem = ""
-                            if data.hasChanges
+                            var exist = false
+                            for each in self.creditCardsData
                             {
-                                try? self.managedObjectContext.save()
+                                if each.creditCards == self.newItem
+                                {
+                                    exist = true
+                                }
+                            }
+                            if !exist
+                            {
+                                let data = CreditCardsData(context: self.managedObjectContext)
+                                data.creditCards = self.newItem
+                                self.textFieldManager.text = ""
+                                if data.hasChanges
+                                {
+                                    try? self.managedObjectContext.save()
+                                }
+                            } else {
+                                let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                                impactHeavy.impactOccurred()
                             }
                         }
                         else if self.type == "debit"
                         {
-                            let data = DebitCardsData(context: self.managedObjectContext)
-                            data.debitCards = self.newItem
-                            self.newItem = ""
-                            if data.hasChanges
+                            var exist = false
+                            for each in self.debitCardsData
                             {
-                                try? self.managedObjectContext.save()
+                                if each.debitCards == self.newItem
+                                {
+                                    exist = true
+                                }
+                            }
+                            if !exist
+                            {
+                                let data = DebitCardsData(context: self.managedObjectContext)
+                                data.debitCards = self.newItem
+                                self.textFieldManager.text = ""
+                                if data.hasChanges
+                                {
+                                    try? self.managedObjectContext.save()
+                                }
+                            } else
+                            {
+                                let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                                impactHeavy.impactOccurred()
                             }
                         }
                         

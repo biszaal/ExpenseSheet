@@ -1,11 +1,3 @@
-//
-//  Home.swift
-//  Expense Sheet
-//
-//  Created by Bishal Aryal on 5/30/20.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -43,13 +35,13 @@ struct Home: View
                                     }
                                 }) {
                                     Image(systemName: "plus")
-                                        .font(.system(size: UIScreen.main.bounds.width / 13.5))
+                                        .font(.system(size: 25))
                                         .foregroundColor(.white)
                                         .background(
                                             Circle()
                                                 .fill(Color.blue)
                                                 .padding()
-                                                .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.height / 10)
+                                                .frame(width: 80, height: 80)
                                     )
                                         .padding(.horizontal)
                                 }
@@ -62,7 +54,7 @@ struct Home: View
                         RecentDataListView()
                         .cornerRadius(10)
                         .padding()
-                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height / 3)
+                        .frame(maxWidth: UIScreen.main.bounds.width)
                             .shadow(radius: 5)
                         
                         VStack
@@ -82,7 +74,7 @@ struct Home: View
                                                 .cornerRadius(.infinity)
                                     }
                                 }
-                                .font(.system(size: UIScreen.main.bounds.width / 20, design: .serif))
+                                .font(.system(size: 20, design: .serif))
                                 .padding()
                                 
                                 if monthlyStatView
@@ -146,6 +138,7 @@ struct Home: View
                 
         }
             .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.horizontal)
     }
     
     func listOfYears() -> [Int]
