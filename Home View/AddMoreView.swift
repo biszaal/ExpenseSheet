@@ -68,8 +68,8 @@ struct AddMoreView: View
                                     try? self.managedObjectContext.save()
                                 }
                             } else {
-                                let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
-                                impactHeavy.impactOccurred()
+                                let notificationGenerator = UINotificationFeedbackGenerator()
+                                notificationGenerator.notificationOccurred(.error)
                             }
                         }
                         else if self.type == "credit"

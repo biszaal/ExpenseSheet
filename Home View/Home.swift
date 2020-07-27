@@ -20,11 +20,11 @@ struct Home: View
                     {
                         HStack
                             {
-                        Text("Expense Sheet")
-                            .font(.system(size: 30, design: .serif))
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-                            .colorInvert()
+                                Text("Expense Sheet")
+                                    .font(.system(size: 30, design: .serif))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.primary)
+                                    .colorInvert()
                                 
                                 Spacer()
                                 
@@ -46,15 +46,15 @@ struct Home: View
                                         .padding(.horizontal)
                                 }
                         }
-                            .padding()
-                            .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
-                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-                            .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
+                        .padding()
+                        .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
+                        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                        .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
                         
                         RecentDataListView()
-                        .cornerRadius(10)
-                        .padding()
-                        .frame(maxWidth: UIScreen.main.bounds.width)
+                            .cornerRadius(10)
+                            .padding()
+                            .frame(maxWidth: UIScreen.main.bounds.width)
                             .shadow(radius: 5)
                         
                         VStack
@@ -79,8 +79,11 @@ struct Home: View
                                 
                                 if monthlyStatView
                                 {
-                                    MonthlyExpenses(year: yearStat)
-                                } else
+                                    MonthlyExpenses(year: self.yearStat)
+                                        .frame(width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
+                                    .cornerRadius(10)
+                                }
+                                else
                                 {
                                     
                                     Picker(selection: $yearStat, label: Text("")) {
@@ -111,10 +114,10 @@ struct Home: View
                                         .frame(height: UIScreen.main.bounds.height / 40)
                                 }
                                 
-                                GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
-                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 18)
                         }
                         
+                        GoogleAdView(bannerId: "ca-app-pub-9776815710061950/1924102059")
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 18)
                 }
                 
                 
@@ -137,8 +140,8 @@ struct Home: View
                 }
                 
         }
-            .edgesIgnoringSafeArea(.top)
-            .edgesIgnoringSafeArea(.horizontal)
+        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.horizontal)
     }
     
     func listOfYears() -> [Int]
@@ -153,5 +156,4 @@ struct Home: View
         }
         return years.sorted(by: >)
     }
-    
 }

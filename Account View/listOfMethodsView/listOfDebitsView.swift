@@ -46,8 +46,8 @@ struct listOfDebitsView: View
                                 } else
                                 {
                                     self.showAlert = true
-                                    let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
-                                    impactHeavy.impactOccurred()
+                                    let notificationGenerator = UINotificationFeedbackGenerator()
+                                    notificationGenerator.notificationOccurred(.error)
                                 }
                             }
                         })

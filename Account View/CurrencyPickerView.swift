@@ -33,6 +33,10 @@ struct CurrencyPickerView: View
                                 {
                                     UserDefaults.standard.set(self.currency, forKey: "curr")
                                     self.isTextField = false
+                                } else
+                                {
+                                    let notificationGenerator = UINotificationFeedbackGenerator()
+                                    notificationGenerator.notificationOccurred(.error)
                                 }
                             })
                             {

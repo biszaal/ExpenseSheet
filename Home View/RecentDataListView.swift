@@ -33,7 +33,6 @@ struct RecentDataListView: View {
                                 self.managedObjectContext.delete(deleteItem)
                                 
                                 try? self.managedObjectContext.save()
-                                
                             }
                         }
                 }
