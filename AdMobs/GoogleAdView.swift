@@ -6,7 +6,8 @@
 //  Copyright © 2020 Bishal Aryal. All rights reserved.
 //
 // App ID: ca-app-pub-9776815710061950~1397133222
-// Unit ID: ca-app-pub-9776815710061950/1924102059
+// Home Unit ID: ca-app-pub-9776815710061950/1924102059
+// Settings Unit ID: ca-app-pub-9776815710061950/4454932018
 
 import SwiftUI
 import GoogleMobileAds

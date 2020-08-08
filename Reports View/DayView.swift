@@ -23,7 +23,7 @@ struct DayView: View
             { each in
                 if each.year == self.year && each.month == self.month
                 {
-                    Text("Date \(each.day) \(each.transaction ?? "") \(each.price.description) \(self.currencyLogo) \(each.type ?? "") \(each.will ?? "")")
+                    Text("Date \(each.day) \(each.transaction ?? "") \(each.category ?? "") \(each.price.description) \(self.currencyLogo) \(each.type ?? "") \(each.will ?? "")")
                     .lineLimit(1)
 
                 }

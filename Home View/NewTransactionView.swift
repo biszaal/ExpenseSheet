@@ -92,110 +92,106 @@ struct NewTransactionView: View
                         Spacer()
                         
                         // MARK: - Transaction Views
-                        if (showView == "text field")
-                        {
-                            TextField("Type Here", text: self.$textFieldManager.text)
-                                .foregroundColor(.secondary)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.default)
-                                .padding()
-                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .cornerRadius(30)
-                        } else if (showView == "category")
-                        {
-                            Picker(selection: $category, label: Text(""))
+                        Group
                             {
-                                ForEach(self.categoriesData)
-                                { data in
-                                    Text(data.category ?? "Unknown").tag(data.category ?? "Unknown")
-                                }
-                            }
-                            .labelsHidden()
-                            .padding()
-                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .cornerRadius(30)
-                            
-                            AddMoreView(type: "category")
-                            
-                        } else if (showView == "price field")
-                        {
-                            TextField("Cost Here", text: self.$textFieldManagerForPrice.text)
-                                .foregroundColor(.secondary)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.numberPad)
-                                .padding()
-                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .cornerRadius(30)
-                        } else if (showView == "credit or debit")
-                        {
-                            Picker(selection: $type, label: Text(""))
-                            {
-                                Text("Credit Card").tag("Credit")
-                                Text("Debit Card or Cash").tag("Debit")
-                            }
-                            .labelsHidden()
-                            .padding()
-                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .cornerRadius(30)
-                        } else if (showView == "method")
-                        {
-                            Picker(selection: $method, label: Text(""))
-                            {
-                                if type == "Credit"
+                                if (showView == "text field")
                                 {
-                                    ForEach(self.creditCardsData)
-                                    { data in
-                                        Text(data.creditCards ?? "Unknown").tag(data.creditCards!)
+                                    TextField("Type Here", text: self.$textFieldManager.text)
+                                        .foregroundColor(.secondary)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.default)
+                                        .padding()
+                                }
+                                else if (showView == "category")
+                                {
+                                    Picker(selection: $category, label: Text(""))
+                                    {
+                                        ForEach(self.categoriesData)
+                                        { data in
+                                            Text(data.category ?? "Unknown").tag(data.category ?? "Unknown")
+                                        }
+                                    }
+                                    .labelsHidden()
+                                    .padding()
+                                    
+                                    AddMoreView(type: "category")
+                                    
+                                }
+                                else if (showView == "price field")
+                                {
+                                    TextField("Cost Here", text: self.$textFieldManagerForPrice.text)
+                                        .foregroundColor(.secondary)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                        .padding()
+                                }
+                                else if (showView == "credit or debit")
+                                {
+                                    Picker(selection: $type, label: Text(""))
+                                    {
+                                        Text("Credit Card").tag("Credit")
+                                        Text("Debit Card or Cash").tag("Debit")
+                                    }
+                                    .labelsHidden()
+                                    .padding()
+                                }
+                                else if (showView == "method")
+                                {
+                                    Picker(selection: $method, label: Text(""))
+                                    {
+                                        if type == "Credit"
+                                        {
+                                            ForEach(self.creditCardsData)
+                                            { data in
+                                                Text(data.creditCards ?? "Unknown").tag(data.creditCards!)
+                                            }
+                                        }
+                                        else if type == "Debit"
+                                        {
+                                            ForEach(self.debitCardsData)
+                                            { data in
+                                                Text(data.debitCards ?? "Unknown").tag(data.debitCards!)
+                                            }
+                                        }
+                                    }
+                                    .labelsHidden()
+                                    .padding()
+                                    
+                                    if type == "Credit"
+                                    {
+                                        AddMoreView(type: "credit")
+                                    }
+                                    else if type == "Debit"
+                                    {
+                                        AddMoreView(type: "debit")
                                     }
                                 }
-                                else if type == "Debit"
+                                else if (showView == "want or need")
                                 {
-                                    ForEach(self.debitCardsData)
-                                    { data in
-                                        Text(data.debitCards ?? "Unknown").tag(data.debitCards!)
+                                    Picker(selection: $will, label: Text(""))
+                                    {
+                                        Text("Want").tag("Want")
+                                        Text("Need").tag("Need")
                                     }
                                 }
-                            }
-                            .labelsHidden()
-                            .padding()
-                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .cornerRadius(30)
-                            
-                            if type == "Credit"
-                            {
-                                AddMoreView(type: "credit")
-                            }
-                            else if type == "Debit"
-                            {
-                                AddMoreView(type: "debit")
-                            }
+                                else if (showView == "add date")
+                                {
+                                    DatePicker("", selection: $date, in: ...maxDate, displayedComponents: .date)
+                                        .labelsHidden()
+                                        .padding()
+                                }
                         }
-                        else if (showView == "want or need")
-                        {
-                            Picker(selection: $will, label: Text(""))
-                            {
-                                Text("Want").tag("Want")
-                                Text("Need").tag("Need")
-                            }
-                            .labelsHidden()
-                            .padding()
-                            .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                            .cornerRadius(30)
-                        } else if (showView == "add date")
-                        {
-                            DatePicker("", selection: $date, in: ...maxDate, displayedComponents: .date)
-                                .labelsHidden()
-                                .padding()
-                                .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
-                                .cornerRadius(30)
-                        }
+                        .frame(width: UIScreen.main.bounds.width / 1.15, height: UIScreen.main.bounds.height / 10)
+                        .cornerRadius(30)
                         
                         // MARK: - Next Button
                         Button(action: {
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred() //haptic feedback
+                            
                             if(self.isCustomDate) {
-                                self.showView = "text field"
-                                self.instruction = "Name of the Purchase."
-                                self.nextButton = "Next"  // after clicking done will take you back to name of the purchase
+                                        self.showView = "text field"
+                                        self.instruction = "Name of the Purchase."
+                                        self.nextButton = "Next"  // after clicking done will take you back to name of the purchase
                             }
                             
                             if(self.buttonTapped == 0)
@@ -285,6 +281,12 @@ struct NewTransactionView: View
                                 self.isCustomDate = false
                                 self.costumeDateView = true
                                 
+                                // set everything back to default
+                                self.transaction = ""
+                                self.price = 0
+                                self.date = Date()
+                                
+                                
                             }
                         }) {
                             Text(nextButton)
@@ -314,12 +316,11 @@ struct NewTransactionView: View
                     .cornerRadius(30)
                     .shadow(radius: 10)
                 
-                
                 // MARK: - "Saved" View
                 if self.viewMessage
                 {
                     Text(self.message)
-                    .lineLimit(1)
+                        .lineLimit(1)
                         .font(.system(size: UIScreen.main.bounds.width / 10, design: .serif))
                         .foregroundColor(.primary)
                         .colorInvert()

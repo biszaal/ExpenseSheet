@@ -44,10 +44,10 @@ struct ContentView: View
                                         Text("Reports")
                                 }
                                 
-                                AccountView().tabItem
+                                SettingsView().tabItem
                                     {
-                                        Image(systemName: "person.fill")
-                                        Text("Account")
+                                        Image(systemName: "gear")
+                                        Text("Settings")
                                 }
                         }
                         

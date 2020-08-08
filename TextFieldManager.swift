@@ -1,11 +1,3 @@
-//
-//  TextFieldManager.swift
-//  ExpenseSheet
-//
-//  Created by Bishal Aryal on 20/7/16.
-//  Copyright © 2020 Bishal Aryal. All rights reserved.
-//
-
 import SwiftUI
 
 class TextFieldManager: ObservableObject

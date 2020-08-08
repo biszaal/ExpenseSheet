@@ -1,9 +1,7 @@
 import UIKit
 import Charts
-import TinyConstraints
 import CoreData
 import Foundation
-
 
 class MonthlyExpensesUIKit: UIViewController, ChartViewDelegate
 {
@@ -35,13 +33,14 @@ class MonthlyExpensesUIKit: UIViewController, ChartViewDelegate
     {
         super.viewDidLayoutSubviews()
         
-        barChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width)
+        barChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width / 2)
         barChart.center = view.center
         
         view.addSubview(barChart)
         
         let set = BarChartDataSet(entries: yValues, label: "")
         set.setColor(.init(red: 230 / 255, green: 95 / 255, blue: 85 / 255, alpha: 1))
+        
         
         let data = BarChartData(dataSet: set)
         barChart.data = data
@@ -75,14 +74,15 @@ class MonthlyExpensesUIKit: UIViewController, ChartViewDelegate
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         print(entry)
     }
-//
+
     // fetching core data and implimenting to the bar chart
     func fetch() {
         let fetchRequest: NSFetchRequest<TransactionData> = TransactionData.getTransactionData()
         
         do
         {
-            let transactionData = try AppDelegate().persistentContainer.viewContext.fetch(fetchRequest)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let transactionData = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
             print("Number of results: \(transactionData.count)")
             
             var listOfMonthlyExpenses: [Float] = []
@@ -97,11 +97,9 @@ class MonthlyExpensesUIKit: UIViewController, ChartViewDelegate
                         totalMonth += each.price
                     }
                 }
-                listOfMonthlyExpenses.append(totalMonth)                }
-            
-            for index in 0..<12
-            {
-                yValues.append(BarChartDataEntry(x: Double(index), y: Double(listOfMonthlyExpenses[index].rounded())))
+                listOfMonthlyExpenses.append(totalMonth)
+                
+                yValues.append(BarChartDataEntry(x: Double(everymonth - 1), y: Double(listOfMonthlyExpenses[everymonth - 1].rounded())))
             }
         }
         catch {

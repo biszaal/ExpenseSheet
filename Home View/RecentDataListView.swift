@@ -6,9 +6,9 @@ struct RecentDataListView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: TransactionData.getTransactionData()) var transactionData: FetchedResults<TransactionData>
-    
+
     @State var currencyLogo = CurrencyPickerView().currency
-    
+
     var body: some View
     {
                 List
@@ -17,7 +17,7 @@ struct RecentDataListView: View {
                         {
                             ForEach(0 ..< numberOfRecentList())
                             { each in
-                                
+
                                 HStack
                                     {
                                         Text("\(self.transactionData[each].year)" + "/" + "\(self.transactionData[each].month)" + "/" + "\(self.transactionData[each].day)")
@@ -26,17 +26,17 @@ struct RecentDataListView: View {
                                             .font(.system(size: 15))
                                 }
                                 .lineLimit(1)
-                                
+
                             }
                             .onDelete{ index in
                                 let deleteItem = self.transactionData[index.first!]
                                 self.managedObjectContext.delete(deleteItem)
-                                
+
                                 try? self.managedObjectContext.save()
                             }
                         }
                 }
-                
+
     }
 
     // This function will tell how many list to view in Recent Transaction tab to prevent app crashing when total data is less then 10
@@ -50,5 +50,5 @@ struct RecentDataListView: View {
         return num
     }
 
-    
+
 }

@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreData
+import QGrid
 
 struct YearView: View
 {
@@ -15,7 +16,7 @@ struct YearView: View
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
                 .colorInvert()
-                .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)! - 10)
                 .background(Color.init(red: 38 / 255, green: 100 / 255, blue: 115 / 255))
