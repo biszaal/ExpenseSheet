@@ -41,12 +41,14 @@
 		61BF22A22481C90C0093D867 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF22A12481C90C0093D867 /* Home.swift */; };
 		61C56CC6248215B90044D12F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C56CC5248215B90044D12F /* CloudKit.framework */; };
 		61C56CCB2482D62C0044D12F /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C56CC92482D62C0044D12F /* TransactionData.swift */; };
+		61D8847E24EB8BCA004D3AAA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61D8847D24EB8BCA004D3AAA /* StoreKit.framework */; };
+		61D8848024EBBB04004D3AAA /* InAppPurchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D8847F24EBBB04004D3AAA /* InAppPurchases.swift */; };
+		61D8848324EC0177004D3AAA /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D8848224EC0177004D3AAA /* RemoveAdsView.swift */; };
 		61DB036424CF70C1009DC0AB /* AnalyticsPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DB036324CF70C1009DC0AB /* AnalyticsPieChart.swift */; };
 		61E5042924D2050E0082DA46 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 61E5042824D2050E0082DA46 /* QGrid */; };
 		61E5042C24D2AB3E0082DA46 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5042B24D2AB3E0082DA46 /* CategoriesView.swift */; };
 		61E5042E24D2AB4D0082DA46 /* MethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5042D24D2AB4D0082DA46 /* MethodsView.swift */; };
 		61E5043024D2AB820082DA46 /* HorizontalBarChartUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5042F24D2AB820082DA46 /* HorizontalBarChartUIKit.swift */; };
-		61E51C4024A93B7500BB49FD /* AddMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E51C3F24A93B7500BB49FD /* AddMoreView.swift */; };
 		61F7471224C07E09003210C2 /* TextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7471124C07E09003210C2 /* TextFieldManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,11 +115,13 @@
 		61C56CC3248215B60044D12F /* Expense Sheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Expense Sheet.entitlements"; sourceTree = "<group>"; };
 		61C56CC5248215B90044D12F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		61C56CC92482D62C0044D12F /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
+		61D8847D24EB8BCA004D3AAA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		61D8847F24EBBB04004D3AAA /* InAppPurchases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchases.swift; sourceTree = "<group>"; };
+		61D8848224EC0177004D3AAA /* RemoveAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsView.swift; sourceTree = "<group>"; };
 		61DB036324CF70C1009DC0AB /* AnalyticsPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPieChart.swift; sourceTree = "<group>"; };
 		61E5042B24D2AB3E0082DA46 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		61E5042D24D2AB4D0082DA46 /* MethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsView.swift; sourceTree = "<group>"; };
 		61E5042F24D2AB820082DA46 /* HorizontalBarChartUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalBarChartUIKit.swift; sourceTree = "<group>"; };
-		61E51C3F24A93B7500BB49FD /* AddMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreView.swift; sourceTree = "<group>"; };
 		61F7471124C07E09003210C2 /* TextFieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldManager.swift; sourceTree = "<group>"; };
 		73C3FB41412CD6E18987CC30 /* Pods_ExpenseSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6FBFD7AE2638119C09D137 /* Pods-ExpenseSheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseSheet.release.xcconfig"; path = "Target Support Files/Pods-ExpenseSheet/Pods-ExpenseSheet.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				61E5042924D2050E0082DA46 /* QGrid in Frameworks */,
 				61C56CC6248215B90044D12F /* CloudKit.framework in Frameworks */,
 				452C979CDF2984B5E2EC6951 /* Pods_ExpenseSheet.framework in Frameworks */,
+				61D8847E24EB8BCA004D3AAA /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +187,6 @@
 				61BF22A12481C90C0093D867 /* Home.swift */,
 				61BF229B2481BA840093D867 /* NewTransactionView.swift */,
 				6174BF24248466AD009BA698 /* RecentDataListView.swift */,
-				61E51C3F24A93B7500BB49FD /* AddMoreView.swift */,
 				6164DA1A24C6DDA0009D3C42 /* Monthly Expenses Chart */,
 			);
 			path = "Home View";
@@ -242,7 +246,7 @@
 		61BF22782481ACB80093D867 = {
 			isa = PBXGroup;
 			children = (
-				61F7471124C07E09003210C2 /* TextFieldManager.swift */,
+				61D8848124EC0155004D3AAA /* InAppPurchases */,
 				61A24C9324A6D9C000660696 /* AdMobs */,
 				6163296B248C863F002B77A2 /* SplashScreenView */,
 				6174BF232484667D009BA698 /* Home View */,
@@ -271,6 +275,7 @@
 				61C56CC3248215B60044D12F /* Expense Sheet.entitlements */,
 				61BF22842481ACB80093D867 /* AppDelegate.swift */,
 				61BF22862481ACB80093D867 /* SceneDelegate.swift */,
+				61F7471124C07E09003210C2 /* TextFieldManager.swift */,
 				61BF228B2481ACB80093D867 /* ContentView.swift */,
 				61BF228D2481ACB90093D867 /* Assets.xcassets */,
 				61BF22922481ACB90093D867 /* LaunchScreen.storyboard */,
@@ -303,11 +308,21 @@
 		61C56CC4248215B90044D12F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61D8847D24EB8BCA004D3AAA /* StoreKit.framework */,
 				61C56CC5248215B90044D12F /* CloudKit.framework */,
 				73C3FB41412CD6E18987CC30 /* Pods_ExpenseSheet.framework */,
 				6162451D24BF95D900924232 /* IntentsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61D8848124EC0155004D3AAA /* InAppPurchases */ = {
+			isa = PBXGroup;
+			children = (
+				61D8848224EC0177004D3AAA /* RemoveAdsView.swift */,
+				61D8847F24EBBB04004D3AAA /* InAppPurchases.swift */,
+			);
+			path = InAppPurchases;
 			sourceTree = "<group>";
 		};
 		61E5042A24D2AB050082DA46 /* CategoriesChart */ = {
@@ -457,10 +472,12 @@
 				61862918248B21E2008F396A /* SettingsView.swift in Sources */,
 				61632971248C8E17002B77A2 /* CategoriesData.swift in Sources */,
 				618F8EE22496BBBD0096BBC1 /* MainWillChart.swift in Sources */,
+				61D8848324EC0177004D3AAA /* RemoveAdsView.swift in Sources */,
 				618F8EED249723950096BBC1 /* MonthlyExpensesUIKit.swift in Sources */,
 				61632964248C516C002B77A2 /* listOfMethodsView.swift in Sources */,
 				6163296D248C8679002B77A2 /* SplashScreenView.swift in Sources */,
 				6187EA492495938E0002B84E /* DayView.swift in Sources */,
+				61D8848024EBBB04004D3AAA /* InAppPurchases.swift in Sources */,
 				618F8EE62496BBF00096BBC1 /* MainTypeChart.swift in Sources */,
 				61BF228C2481ACB80093D867 /* ContentView.swift in Sources */,
 				6174BF5724871914009BA698 /* AnalyticsView.swift in Sources */,
@@ -471,7 +488,6 @@
 				61F7471224C07E09003210C2 /* TextFieldManager.swift in Sources */,
 				61C56CCB2482D62C0044D12F /* TransactionData.swift in Sources */,
 				61862911248AC7AA008F396A /* CreditCardsData.swift in Sources */,
-				61E51C4024A93B7500BB49FD /* AddMoreView.swift in Sources */,
 				6174BF25248466AD009BA698 /* RecentDataListView.swift in Sources */,
 				61E5043024D2AB820082DA46 /* HorizontalBarChartUIKit.swift in Sources */,
 				6186291A248B223B008F396A /* listOfCategoriesView.swift in Sources */,
@@ -632,7 +648,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = biszaal.Expense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -661,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = biszaal.Expense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

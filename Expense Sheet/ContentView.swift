@@ -93,6 +93,7 @@ struct ContentView: View
                 if each.creditCards == creditCard
                 {
                     exist = true
+                    break
                 }
             }
             if !exist
@@ -111,6 +112,7 @@ struct ContentView: View
                 if each.debitCards == debitCard
                 {
                     exist = true
+                    break
                 }
             }
             if !exist
@@ -129,6 +131,7 @@ struct ContentView: View
                 if each.category == category
                 {
                     exist = true
+                    break
                 }
             }
             if !exist

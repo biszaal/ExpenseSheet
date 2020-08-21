@@ -82,6 +82,7 @@ struct listOfCategoriesView: View
                             
                     }
                 }
+                
         }
         .alert(isPresented: $showAlert)
         {

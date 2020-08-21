@@ -1,3 +1,5 @@
+// This class is helps to limit the text field when this class is called
+
 import SwiftUI
 
 class TextFieldManager: ObservableObject

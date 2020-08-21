@@ -55,7 +55,7 @@ class PieChartUIKit: UIViewController, ChartViewDelegate
         pieChart.rotationEnabled = false
         pieChart.isUserInteractionEnabled = false
         
-        pieChart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
+        pieChart.animate(xAxisDuration: 1, yAxisDuration: 1)
     }
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         print(entry)

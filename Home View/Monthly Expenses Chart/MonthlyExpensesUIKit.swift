@@ -66,9 +66,9 @@ class MonthlyExpensesUIKit: UIViewController, ChartViewDelegate
         barChart.doubleTapToZoomEnabled = false
         barChart.drawValueAboveBarEnabled = true
         barChart.drawGridBackgroundEnabled = true
-        barChart.backgroundColor = .secondarySystemBackground
-        barChart.gridBackgroundColor = .secondarySystemBackground
-        barChart.animate(yAxisDuration: 1.5, easingOption: .easeInOutQuart)
+        barChart.backgroundColor = .clear
+        barChart.gridBackgroundColor = .clear
+        barChart.animate(yAxisDuration: 1, easingOption: .easeInOutQuart)
         barChart.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width / 1.1, height: UIScreen.main.bounds.height / 3.5)
     }
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

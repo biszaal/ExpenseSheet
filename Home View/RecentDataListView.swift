@@ -20,11 +20,15 @@ struct RecentDataListView: View {
 
                                 HStack
                                     {
-                                        Text("\(self.transactionData[each].year)" + "/" + "\(self.transactionData[each].month)" + "/" + "\(self.transactionData[each].day)")
-                                            .font(.system(size: 10))
-                                        Text("\(self.transactionData[each].transaction ?? "Unknown"), \(self.transactionData[each].category ?? "Unknown"), \(self.transactionData[each].price.description) \(self.currencyLogo), \(self.transactionData[each].type ?? "Unknown")")
-                                            .font(.system(size: 15))
+                                    
+                                    Text(String(self.transactionData[each].transaction ?? "Unknown"))
+                                    Text(String(self.transactionData[each].category ?? "Unknown"))
+                                    Text(String(self.transactionData[each].price.description))
+                                    Text(String(self.currencyLogo))
+                                    Text(String(self.transactionData[each].type ?? "Unknown"))
+                                    Text(String(self.transactionData[each].will ?? "Unknown"))
                                 }
+                                .font(.system(size: 15))
                                 .lineLimit(1)
 
                             }
