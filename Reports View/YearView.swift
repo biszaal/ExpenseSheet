@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreData
-import QGrid
 
 struct YearView: View
 {

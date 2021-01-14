@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View
 {
+    @ObservedObject var store = InAppPurchaseStore()
     @State var showRemoveAds: Bool = false
     
     @State var hideAds: Bool = UserDefaults.standard.bool(forKey: "ads_removed")
@@ -83,7 +84,9 @@ struct SettingsView: View
                                     if !hideAds
                                     {
                                         GoogleAdView(bannerId: "ca-app-pub-9776815710061950/4454932018")
-                                        .frame(height: UIScreen.main.bounds.height / 13)
+                                            
+                                            .frame(width: UIScreen.main.bounds.width / 1.25, height: UIScreen.main.bounds.height / 10)
+                                        
                                     }
                                     
                                     Section(header: Text("Support Creator"))
@@ -98,15 +101,11 @@ struct SettingsView: View
                             .navigationBarHidden(true)
                             
                     }
-                    .navigationViewStyle(DoubleColumnNavigationViewStyle())
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .padding(1)
                 }
                 .edgesIgnoringSafeArea(.top)
                 .edgesIgnoringSafeArea(.horizontal)
-        }
-        .sheet(isPresented: $showRemoveAds)
-        {
-            RemoveAdsView()
         }
     }
 }

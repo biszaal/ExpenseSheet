@@ -84,6 +84,7 @@ struct listOfCategoriesView: View
                 }
                 
         }
+        
         .alert(isPresented: $showAlert)
         {
             Alert(title: Text("Already Exists"), message: Text("Item cannot be added because it already exists."), dismissButton: .default(Text("OK")))

@@ -166,16 +166,16 @@ struct Home: View
                 if self.showTransactionView
                 {
                     GeometryReader
-                        {
-                            _ in
-                            
-                            NewTransactionView()
+                        { _ in
+                        NewTransactionView(showTransactionView: self.$showTransactionView)
+                            .offset(y: 50)
                     }
                     .padding(.bottom, UIScreen.main.bounds.height / 3.5)
                     .background(
                         Color.black.opacity(self.backgroundOpacity).animation(.easeInOut(duration: 0.2))
                             .animation(nil)
-                            .onTapGesture {     // first remove background and start animation
+                            .onTapGesture
+                            {     // first remove background and start animation
                                 self.backgroundOpacity = 0
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
                                 {

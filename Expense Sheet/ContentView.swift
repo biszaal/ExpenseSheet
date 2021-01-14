@@ -11,6 +11,8 @@ import CoreData
 
 struct ContentView: View
 {
+    @EnvironmentObject private var store: InAppPurchaseStore
+    
     @Environment(\.managedObjectContext) var managedObjectContext: NSManagedObjectContext
     @FetchRequest(fetchRequest: CreditCardsData.getCreditCardsData()) var creditCardsData: FetchedResults<CreditCardsData>
     @FetchRequest(fetchRequest: DebitCardsData.getDebitCardsData()) var debitCardsData: FetchedResults<DebitCardsData>
